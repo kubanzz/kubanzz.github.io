@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Java 知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理, MySQL, ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目...">
+    <meta name="robots" content="all">
+    <meta name="author" content="pdai">
+    <meta name="keywords" content="Java 全栈知识体系, java体系, java知识体系, java框架,java详解,java学习路线,java spring, java面试, 知识体系, java技术体系, java编程, java编程指南,java开发体系, java开发,java教程,java,java数据结构, 算法, 开发基础">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preload" href="/assets/css/0.styles.2e713c08.css" as="style"><link rel="preload" href="/assets/js/app.1c337853.js" as="script"><link rel="preload" href="/assets/js/3.b02e7092.js" as="script"><link rel="preload" href="/assets/js/101.c905564f.js" as="script"><link rel="prefetch" href="/assets/js/10.ceb3101a.js"><link rel="prefetch" href="/assets/js/100.b09a4b02.js"><link rel="prefetch" href="/assets/js/102.b0347c86.js"><link rel="prefetch" href="/assets/js/103.0b941500.js"><link rel="prefetch" href="/assets/js/104.aa9d77de.js"><link rel="prefetch" href="/assets/js/105.4cbc1bc6.js"><link rel="prefetch" href="/assets/js/106.6a6b364e.js"><link rel="prefetch" href="/assets/js/107.4376147f.js"><link rel="prefetch" href="/assets/js/108.72d51d06.js"><link rel="prefetch" href="/assets/js/109.df0075ec.js"><link rel="prefetch" href="/assets/js/11.99f846c6.js"><link rel="prefetch" href="/assets/js/110.57cc32a8.js"><link rel="prefetch" href="/assets/js/111.982f4d8b.js"><link rel="prefetch" href="/assets/js/112.38bfda33.js"><link rel="prefetch" href="/assets/js/113.2d834ece.js"><link rel="prefetch" href="/assets/js/114.7600e6b5.js"><link rel="prefetch" href="/assets/js/115.c53dd888.js"><link rel="prefetch" href="/assets/js/116.dd8a6a65.js"><link rel="prefetch" href="/assets/js/117.8511fe15.js"><link rel="prefetch" href="/assets/js/118.ade530c5.js"><link rel="prefetch" href="/assets/js/119.f23bf053.js"><link rel="prefetch" href="/assets/js/12.743bef58.js"><link rel="prefetch" href="/assets/js/120.e0a8b7ea.js"><link rel="prefetch" href="/assets/js/121.ffc1f611.js"><link rel="prefetch" href="/assets/js/122.42847824.js"><link rel="prefetch" href="/assets/js/123.50e0eada.js"><link rel="prefetch" href="/assets/js/124.25d50192.js"><link rel="prefetch" href="/assets/js/125.e17385d1.js"><link rel="prefetch" href="/assets/js/126.904ed144.js"><link rel="prefetch" href="/assets/js/127.5a938814.js"><link rel="prefetch" href="/assets/js/128.b353e3a1.js"><link rel="prefetch" href="/assets/js/129.2c18e0d3.js"><link rel="prefetch" href="/assets/js/13.adb5d444.js"><link rel="prefetch" href="/assets/js/130.69a2b37b.js"><link rel="prefetch" href="/assets/js/131.c02089a1.js"><link rel="prefetch" href="/assets/js/132.bc2caf02.js"><link rel="prefetch" href="/assets/js/133.5b625fea.js"><link rel="prefetch" href="/assets/js/134.c0444d3e.js"><link rel="prefetch" href="/assets/js/135.570145d4.js"><link rel="prefetch" href="/assets/js/136.14dc0146.js"><link rel="prefetch" href="/assets/js/137.5571aeca.js"><link rel="prefetch" href="/assets/js/138.d0e7ecd3.js"><link rel="prefetch" href="/assets/js/139.8122e620.js"><link rel="prefetch" href="/assets/js/14.062ad1e9.js"><link rel="prefetch" href="/assets/js/140.a4157b9e.js"><link rel="prefetch" href="/assets/js/141.a21e8c95.js"><link rel="prefetch" href="/assets/js/142.b77c9e6a.js"><link rel="prefetch" href="/assets/js/143.6ed28be3.js"><link rel="prefetch" href="/assets/js/144.4ed950c5.js"><link rel="prefetch" href="/assets/js/145.defcbdcf.js"><link rel="prefetch" href="/assets/js/146.1601f6b6.js"><link rel="prefetch" href="/assets/js/147.bcf8cfce.js"><link rel="prefetch" href="/assets/js/148.06c95943.js"><link rel="prefetch" href="/assets/js/149.89cf96c2.js"><link rel="prefetch" href="/assets/js/15.b9719217.js"><link rel="prefetch" href="/assets/js/150.40482dd5.js"><link rel="prefetch" href="/assets/js/151.5c02beef.js"><link rel="prefetch" href="/assets/js/152.1c7a84a6.js"><link rel="prefetch" href="/assets/js/153.fde1ee98.js"><link rel="prefetch" href="/assets/js/154.11c91a1d.js"><link rel="prefetch" href="/assets/js/155.083704c8.js"><link rel="prefetch" href="/assets/js/156.5463b99a.js"><link rel="prefetch" href="/assets/js/157.560a333f.js"><link rel="prefetch" href="/assets/js/158.299f1eab.js"><link rel="prefetch" href="/assets/js/159.9abe708d.js"><link rel="prefetch" href="/assets/js/16.fca7d7b7.js"><link rel="prefetch" href="/assets/js/160.4ff46a0f.js"><link rel="prefetch" href="/assets/js/161.a6c486b5.js"><link rel="prefetch" href="/assets/js/162.bef29922.js"><link rel="prefetch" href="/assets/js/163.7cf2468e.js"><link rel="prefetch" href="/assets/js/164.27c6a07e.js"><link rel="prefetch" href="/assets/js/165.9279b6b4.js"><link rel="prefetch" href="/assets/js/166.1246f61a.js"><link rel="prefetch" href="/assets/js/167.9c2dbfa7.js"><link rel="prefetch" href="/assets/js/168.a40fd447.js"><link rel="prefetch" href="/assets/js/169.eaaa3b21.js"><link rel="prefetch" href="/assets/js/17.63c7bd06.js"><link rel="prefetch" href="/assets/js/170.38b55274.js"><link rel="prefetch" href="/assets/js/171.0aa03f11.js"><link rel="prefetch" href="/assets/js/172.a9b46f05.js"><link rel="prefetch" href="/assets/js/173.79282476.js"><link rel="prefetch" href="/assets/js/174.c0183c86.js"><link rel="prefetch" href="/assets/js/175.478a47f9.js"><link rel="prefetch" href="/assets/js/176.75a5a27f.js"><link rel="prefetch" href="/assets/js/18.52e671f4.js"><link rel="prefetch" href="/assets/js/19.448d0875.js"><link rel="prefetch" href="/assets/js/20.2cef79e7.js"><link rel="prefetch" href="/assets/js/21.aa3006bb.js"><link rel="prefetch" href="/assets/js/22.710d6e2c.js"><link rel="prefetch" href="/assets/js/23.ad2e9c92.js"><link rel="prefetch" href="/assets/js/24.020145fe.js"><link rel="prefetch" href="/assets/js/25.ada5f251.js"><link rel="prefetch" href="/assets/js/26.d22d138b.js"><link rel="prefetch" href="/assets/js/27.b3cf1201.js"><link rel="prefetch" href="/assets/js/28.5ff0bfb8.js"><link rel="prefetch" href="/assets/js/29.485f2b8b.js"><link rel="prefetch" href="/assets/js/30.2317d6ce.js"><link rel="prefetch" href="/assets/js/31.c4451eaa.js"><link rel="prefetch" href="/assets/js/32.6b847218.js"><link rel="prefetch" href="/assets/js/33.87c3b3aa.js"><link rel="prefetch" href="/assets/js/34.e38c6dd2.js"><link rel="prefetch" href="/assets/js/35.d279db47.js"><link rel="prefetch" href="/assets/js/36.f753589b.js"><link rel="prefetch" href="/assets/js/37.4a6a2e39.js"><link rel="prefetch" href="/assets/js/38.ae8bd94d.js"><link rel="prefetch" href="/assets/js/39.c59385c5.js"><link rel="prefetch" href="/assets/js/4.775276f1.js"><link rel="prefetch" href="/assets/js/40.ec09fa5c.js"><link rel="prefetch" href="/assets/js/41.38dd0189.js"><link rel="prefetch" href="/assets/js/42.eb939c7b.js"><link rel="prefetch" href="/assets/js/43.89c78c22.js"><link rel="prefetch" href="/assets/js/44.79d9957a.js"><link rel="prefetch" href="/assets/js/45.2d86fd58.js"><link rel="prefetch" href="/assets/js/46.b9bc9b70.js"><link rel="prefetch" href="/assets/js/47.ada08b04.js"><link rel="prefetch" href="/assets/js/48.539528a1.js"><link rel="prefetch" href="/assets/js/49.6fbfbbaa.js"><link rel="prefetch" href="/assets/js/5.eee55e85.js"><link rel="prefetch" href="/assets/js/50.3c0cf41c.js"><link rel="prefetch" href="/assets/js/51.5325c960.js"><link rel="prefetch" href="/assets/js/52.3b1cd138.js"><link rel="prefetch" href="/assets/js/53.78d19eef.js"><link rel="prefetch" href="/assets/js/54.5e468d37.js"><link rel="prefetch" href="/assets/js/55.d9a8dcb6.js"><link rel="prefetch" href="/assets/js/56.9d93de98.js"><link rel="prefetch" href="/assets/js/57.f21c715f.js"><link rel="prefetch" href="/assets/js/58.1475a83f.js"><link rel="prefetch" href="/assets/js/59.819b29ae.js"><link rel="prefetch" href="/assets/js/6.8e026274.js"><link rel="prefetch" href="/assets/js/60.41a3a7a0.js"><link rel="prefetch" href="/assets/js/61.e83bc878.js"><link rel="prefetch" href="/assets/js/62.329c8a5a.js"><link rel="prefetch" href="/assets/js/63.169b3b2c.js"><link rel="prefetch" href="/assets/js/64.47f034f3.js"><link rel="prefetch" href="/assets/js/65.0d8bd679.js"><link rel="prefetch" href="/assets/js/66.d23e9e5e.js"><link rel="prefetch" href="/assets/js/67.f9abb6fc.js"><link rel="prefetch" href="/assets/js/68.67f072df.js"><link rel="prefetch" href="/assets/js/69.a733e18a.js"><link rel="prefetch" href="/assets/js/7.c5a82798.js"><link rel="prefetch" href="/assets/js/70.752d07fc.js"><link rel="prefetch" href="/assets/js/71.c171bfd0.js"><link rel="prefetch" href="/assets/js/72.ebcd692e.js"><link rel="prefetch" href="/assets/js/73.00dab538.js"><link rel="prefetch" href="/assets/js/74.7cbd77ae.js"><link rel="prefetch" href="/assets/js/75.fad5345b.js"><link rel="prefetch" href="/assets/js/76.a5544c13.js"><link rel="prefetch" href="/assets/js/77.153c5242.js"><link rel="prefetch" href="/assets/js/78.dd6275bf.js"><link rel="prefetch" href="/assets/js/79.824b3d5e.js"><link rel="prefetch" href="/assets/js/8.dc522fd4.js"><link rel="prefetch" href="/assets/js/80.a40f869a.js"><link rel="prefetch" href="/assets/js/81.45fe78e3.js"><link rel="prefetch" href="/assets/js/82.cec07a57.js"><link rel="prefetch" href="/assets/js/83.4b57cb83.js"><link rel="prefetch" href="/assets/js/84.c39ee6cb.js"><link rel="prefetch" href="/assets/js/85.a32409a4.js"><link rel="prefetch" href="/assets/js/86.16a7b081.js"><link rel="prefetch" href="/assets/js/87.2c4f62cb.js"><link rel="prefetch" href="/assets/js/88.bd227216.js"><link rel="prefetch" href="/assets/js/89.ac4201b8.js"><link rel="prefetch" href="/assets/js/9.df3cd7fc.js"><link rel="prefetch" href="/assets/js/90.bf6b197a.js"><link rel="prefetch" href="/assets/js/91.9ba4ee3f.js"><link rel="prefetch" href="/assets/js/92.2972038d.js"><link rel="prefetch" href="/assets/js/93.5f3249d9.js"><link rel="prefetch" href="/assets/js/94.4da2a6f4.js"><link rel="prefetch" href="/assets/js/95.8ee0a7a7.js"><link rel="prefetch" href="/assets/js/96.6c75956c.js"><link rel="prefetch" href="/assets/js/97.eb069d33.js"><link rel="prefetch" href="/assets/js/98.d099974a.js"><link rel="prefetch" href="/assets/js/99.f53424f3.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.63928db4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2e713c08.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Java 知识体系</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>大数据</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="active sidebar-link">Flume收集日志 - windows（实战版一）</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#一、flume的核心组件" class="sidebar-link">一、Flume的核心组件</a></li><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#二、flume的常见使用" class="sidebar-link">二、Flume的常见使用</a></li><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#三、flume的相关配置" class="sidebar-link">三、flume的相关配置</a></li><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#四、flume的自定义拦截器" class="sidebar-link">四、flume的自定义拦截器</a></li><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#五、windows下flume的启动" class="sidebar-link">五、windows下flume的启动</a></li><li class="sidebar-sub-header"><a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html#六、异常及解决" class="sidebar-link">六、异常及解决：</a></li></ul></li><li><a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="sidebar-link">Flume收集日志 - windows（实战版二）</a></li><li><a href="/posts/大数据/HBase理论学习与分析.html" class="sidebar-link">HBase理论学习与分析</a></li><li><a href="/posts/大数据/Hadoop平台的搭建.html" class="sidebar-link">Hadoop平台的搭建</a></li><li><a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="sidebar-link">Hadoop的设计目标及重要特性</a></li><li><a href="/posts/大数据/Oozie学习（基本任务）.html" class="sidebar-link">Oozie学习（基本任务）</a></li><li><a href="/posts/大数据/Oozie学习（定时任务）.html" class="sidebar-link">Oozie学习（定时任务）</a></li><li><a href="/posts/大数据/海量数据处理.html" class="sidebar-link">海量数据处理</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><p><strong><a href="http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html" target="_blank" rel="noopener noreferrer">flume官方文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></strong></p> <p><strong><a href="http://www.51niux.com/?id=197" target="_blank" rel="noopener noreferrer">技术博客（较全面的介绍）<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></strong></p> <p></p> <h2 id="一、flume的核心组件"><a href="#一、flume的核心组件" class="header-anchor">#</a> 一、Flume的核心组件</h2> <ul><li><strong>source</strong>：用于对源文件的监控（即数据的传入点）</li> <li><strong>channel</strong>：用于event数据的传输（即传输管道）</li> <li><strong>sink</strong>：用于event数据的输出（即输出点）</li></ul> <h3 id="_1-1-flume的source类型"><a href="#_1-1-flume的source类型" class="header-anchor">#</a> 1.1 Flume的source类型</h3> <ul><li><p><a href="https://www.cnblogs.com/swordfall/p/8254271.html" target="_blank" rel="noopener noreferrer">参考一<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p><a href="https://www.cnblogs.com/qingyunzong/p/8995554.html" target="_blank" rel="noopener noreferrer">参考二<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p><a href="http://flume.apache.org/FlumeUserGuide.html#flume-sources" target="_blank" rel="noopener noreferrer">参考三<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>（<strong>官方文档</strong>）</p> <p>source类型的种类比较多，上面是关于各种类型的介绍，比较常用的是avor、thrift、exec、jms、spool，本次记录使用的是spool，spool是对<strong>本地文件的监视</strong>，即监视文件夹中的文件，将新加入的文件进行处理上传，成功处理后的文件默认后缀会加上**.COMPLETED**（可自定义修改，也可修改为在上传后删除）。</p></li></ul> <h3 id="_1-2-flume的chancel类型"><a href="#_1-2-flume的chancel类型" class="header-anchor">#</a> 1.2 Flume的chancel类型</h3> <ul><li><strong>Memory Channel</strong>：基于内存传输，实现高速吞吐，但无法保证数据的完整性。</li> <li><strong>JDBC Channel</strong>：事件会被<strong>持久化</strong>（存储）到可靠的数据库里，目前支持嵌入式Derby数据库，但是该数据库使用起来不太方便，目前不适用于生产环境。</li> <li><strong>File Channel</strong>：基于磁盘传输（<strong>持久化</strong>隧道），将事件存储于磁盘中，即使宕机也能保证数据的完整性，即数据不会丢失。</li> <li><strong>Psuedo Transaction Channel</strong>（不常见）</li> <li>相关参数及详情参考最上方的官方文档及技术博客</li></ul> <h3 id="_1-3-flume的sink类型"><a href="#_1-3-flume的sink类型" class="header-anchor">#</a> 1.3 Flume的sink类型</h3> <ul><li><p><a href="https://www.cnblogs.com/swordfall/p/8157766.html" target="_blank" rel="noopener noreferrer">参考<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>sink类型同样有很多种，如hdfs sink、hbase sink、avor sink、logger sink等（详情参考上面链接），本案例使用的是hdfs sink，即将日志数据通过flume收集传输到hdfs。</p></li></ul> <p></p> <h2 id="二、flume的常见使用"><a href="#二、flume的常见使用" class="header-anchor">#</a> 二、Flume的常见使用</h2> <br> <h3 id="_2-1-多层代理"><a href="#_2-1-多层代理" class="header-anchor">#</a> 2.1 多层代理</h3> <p><img src="https://raw.githubusercontents.com/PI-KA-CHU/Image-OSS/main/images57234496-56a8a480-7053-11e9-8d6e-223dff119718.png" alt="image"></p> <h3 id="_2-2-并流"><a href="#_2-2-并流" class="header-anchor">#</a> 2.2 并流</h3> <ul><li>从大量Web服务器收集的日志发送给写入HDFS集群的十几个代理，即收集服务器集群的日志文件，汇流到代理flume并存入hdfs</li></ul> <p><img src="https://raw.githubusercontents.com/PI-KA-CHU/Image-OSS/main/images57234574-8788d980-7053-11e9-93e3-9b1b96be2638.png" alt="image"></p> <h3 id="_2-3-多路复用"><a href="#_2-3-多路复用" class="header-anchor">#</a> 2.3 多路复用</h3> <ul><li>将事件流<strong>多路复用</strong>到一个或多个目的地。这是通过定义可以复制或选择性地将事件路由到一个或多个信道的流复用器来实现的。即同一个数据源的日志文件我们可能需要分配到多处进行处理，或者说有多个子系统需要使用到，此时可以使用到多路复用，sink指向不同的目的地。</li></ul> <p><img src="https://raw.githubusercontents.com/PI-KA-CHU/Image-OSS/main/images57234813-1138a700-7054-11e9-8cf9-1dd6acfa3213.png" alt="image"></p> <p></p> <h2 id="三、flume的相关配置"><a href="#三、flume的相关配置" class="header-anchor">#</a> 三、flume的相关配置</h2> <h3 id="_3-1-flume-env-sh文件"><a href="#_3-1-flume-env-sh文件" class="header-anchor">#</a> 3.1 flume-env.sh文件</h3> <ul><li>如果Hadoop相关支持包已经导入到flume的lib中，则配置flume的lib路径</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$FLUME_CLASSPATH=&quot;D:\flume\apache-flume-1.8.0-bin\lib&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>如果Flume/lib中没有Hadoop相关支持包，则需要指定本地Hadoop路径</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>HADOOP_HOME=&quot;G:\\hadoop-2.5.0-cdh5.3.6&quot;
+FLUME_CLASSPATH=&quot;$HADOOP_HOME/share/hadoop/hdfs//hadoop-hdfs-2.5.0-cdh5.3.1.jar&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_3-2-example-conf文件"><a href="#_3-2-example-conf文件" class="header-anchor">#</a> 3.2 example.conf文件</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+# flume相关组件的声明
+a1.sources = r1
+a1.sinks = k1 k2
+a1.channels = c1 c2
+
+# 设置source r1
+# fileHeader：是否添加绝对路径的标头
+# inputCharset：传入event的编码格式
+# ignorePattern：忽略的文件名，此处匹配的文件不会被传输（可用正则）
+# includePattern：包含的文件名，此处匹配的文件会被传输（可用正则）
+a1.sources.r1.type = spooldir
+a1.sources.r1.spoolDir = E:\\BigDataSolf\\log\\uploadTest
+a1.sources.r1.fileHeader = true
+a1.sources.r1.inputCharset  = GBK
+# a1.sources.r1.ignorePattern = catalina.*
+a1.sources.r1.includePattern = app.*
+
+
+# 配置r1拦截器(自定义拦截器)，自定义拦截器需要打成jar包后放在flume的lib文件夹中，后面会有自定义拦截器的介绍。
+# type：拦截器类型（此处为自定义的拦截器）
+# regexs和datePattern：都是自定义的正则参数
+a1.sources.r1.interceptors = i1
+a1.sources.r1.interceptors.i1.type = com.bnuz.flume.MyLogBuilder
+a1.sources.r1.interceptors.i1.regexs = localhost_access_log,app
+a1.sources.r1.interceptors.i1.datePattern = [0-9]{4}-[0-9]{2}-[0-9]{2}
+
+# 配置多路复用选择器（根据头信息进行分流）
+# header：指header中的参数名称（类似于key）
+# mapping.localhost_access_log：localhost_access_log相当于value，即如果myHeader匹配的value为localhost_access_log就使用c1管道，如果是app则使用c2管道。
+a1.sources.r1.selector.type = multiplexing
+a1.sources.r1.selector.header = myHeader
+a1.sources.r1.selector.mapping.localhost_access_log = c1
+a1.sources.r1.selector.mapping.app = c2
+
+
+# Use a channel which buffers events in memory for c1
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 8000
+a1.channels.c1.transactionCapacity = 1000
+
+# Use a channel which buffers events in memory for c2
+a1.channels.c2.type = memory
+a1.channels.c2.capacity = 8000
+a1.channels.c2.transactionCapacity = 1000
+
+
+# configure the sink k1
+# %{fileDate}是自定义拦截器中加入的日期参数，用于将日志文件按照日期保存到不同的文件夹中
+# 将access_log文件传输到access_log文件夹中
+# fileSuffix：保存的文件前缀
+# fileSuffix：保存的文件后缀
+# useLocalTimeStamp：为每个文件名加上存储时的时间戳
+a1.sinks.k1.type=hdfs
+a1.sinks.k1.hdfs.path=hdfs://127.0.0.1/logs/zhsj/%{fileDate}/access_log
+a1.sinks.k1.hdfs.fileType=DataStream
+a1.sinks.k1.hdfs.writeFormat=TEXT
+a1.sinks.k1.hdfs.filePrefix=%{fileDate}
+a1.sinks.k1.hdfs.fileSuffix=.log
+a1.sinks.k1.hdfs.rollInterval=0
+a1.sinks.k1.hdfs.rollSize=10240000
+a1.sinks.k1.hdfs.rollCount=0
+a1.sinks.k1.hdfs.minBlockReplicas=1
+a1.sinks.k1.hdfs.useLocalTimeStamp = true
+
+# configure the sink k2
+a1.sinks.k2.type=hdfs
+a1.sinks.k2.hdfs.path=hdfs://127.0.0.1/logs/zhsj/%{fileDate}/app_log/
+a1.sinks.k2.hdfs.fileType=DataStream
+a1.sinks.k2.hdfs.writeFormat=TEXT
+a1.sinks.k2.hdfs.filePrefix=%{fileDate}
+a1.sinks.k2.hdfs.fileSuffix=.log
+a1.sinks.k2.hdfs.rollInterval=0
+a1.sinks.k2.hdfs.rollSize=10240000
+a1.sinks.k2.hdfs.rollCount=0
+a1.sinks.k2.hdfs.minBlockReplicas=1
+a1.sinks.k2.hdfs.useLocalTimeStamp = true
+
+
+# Bind the source r1 and sink to the channel
+# 绑定不同的channel、sink和source间的关系
+a1.sources.r1.channels = c1 c2
+a1.sinks.k1.channel = c1
+a1.sinks.k2.channel = c2
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br></div></div><p></p> <h2 id="四、flume的自定义拦截器"><a href="#四、flume的自定义拦截器" class="header-anchor">#</a> 四、flume的自定义拦截器</h2> <ul><li>此拦截器用于对event的简单过滤，并为不同文件和时间的event进行标识，flume配置文件（如上）会根据参数的不同保存到不同的文件夹中。将写好的拦截器打包成<code>jar包</code>并保存到flume的<code>lib</code>文件夹中。</li></ul> <p>MyLogBuilder（拦截器入口）</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import org.apache.flume.Context;
+import org.apache.flume.interceptor.Interceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MyLogBuilder implements Interceptor.Builder{
+    private Logger log = LoggerFactory.getLogger(MyLogBuilder.class);
+    private String regexs = &quot;&quot;;
+    private String datePattern = &quot;&quot;;
+
+    //获取传入的相关参数
+    @Override
+    public void configure(Context context) {
+        regexs = context.getString(&quot;regexs&quot;);
+        datePattern = context.getString(&quot;datePattern&quot;);
+        log.info(&quot;------获取到拦截器参数pattern为：&quot; + regexs);
+    }
+    
+    //调用拦截器并传入参数
+    @Override
+    public Interceptor build() {
+        log.info(&quot;------初始化自定义拦截器&quot;);
+        return new MyLogInterceptor(regexs,datePattern);
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p>MyLogInterceptor（拦截器的实现）</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>import org.apache.commons.io.Charsets;
+import org.apache.flume.Event;
+import org.apache.flume.interceptor.Interceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class MyLogInterceptor implements Interceptor {
+
+    private Logger log = LoggerFactory.getLogger(MyLogInterceptor.class);
+
+    //文件地址（包含文件名）
+    private String filePath = &quot;&quot;;
+
+    //文件类型过滤参数
+    private String regexs = &quot;&quot;;
+
+    //日期格式（正则表达式）
+    private String datePattern = &quot;&quot;;
+
+    //日志日期键值
+    private final String FILE_DATE_KEY = &quot;fileDate&quot;;
+    private String fileDateValue = &quot;&quot;;
+
+    //日志类型键值
+    private  final String HEADER_KEY = &quot;myHeader&quot;;
+    private String headerValue = &quot;&quot;;
+
+    MyLogInterceptor(String regexs,String datePattern){
+        this.regexs = regexs;
+        this.datePattern = datePattern;
+    }
+
+    @Override
+    public void initialize() {
+        log.info(regexs + &quot;拦截器initialize方法执行&quot;);
+    }
+
+    /**
+     * 对每个事件进行拦截修改
+     *
+     * @param event 文件事件
+     * @return
+     */
+    @Override
+    public Event intercept(Event event) {
+
+
+        /**
+         * 根据不同的日志文件内容进行不同的正则表达式匹配
+         * access日志文件每天生成一次，则直接使用文件名进行日期匹配（文件名包含日志）
+         * app日志文件几天生成一次文件，根据具体日志数据进行匹配
+         */
+        Pattern pattern = pattern = Pattern.compile(datePattern);
+        Matcher matcher = null;
+        if (filePath.contains(&quot;localhost_access_log&quot;)){
+            //通过正则表达式获取日志创建日期
+            matcher  = pattern.matcher(filePath);
+        }else if(filePath.contains(&quot;app.&quot;)){
+            //日志具体数据
+            String bodyData = new String(event.getBody(), Charsets.UTF_8);
+            log.info(&quot;收集到的数据为：{}&quot;,bodyData);
+            matcher = pattern.matcher(bodyData);
+        }
+
+        if (matcher != null &amp;&amp; matcher.find()){
+            log.info(&quot;匹配到日期为：&quot; + matcher.group(0));
+            fileDateValue = matcher.group(0);
+
+            event.getHeaders().put(HEADER_KEY,headerValue);
+            event.getHeaders().put(FILE_DATE_KEY,fileDateValue);
+
+            return event;
+        }else {
+            log.info(&quot;信息被过滤&quot;);
+            return null;
+        }
+    }
+
+    @Override
+    public List&lt;Event&gt; intercept(List&lt;Event&gt; list) {
+
+        List&lt;Event&gt; result = new ArrayList&lt;&gt;();
+        //获取文件名
+        filePath = list.get(0).getHeaders().get(&quot;file&quot;);
+        
+        //将传入的过滤参数进行切割
+        String[] regexArr = regexs.split(&quot;,&quot;);
+        for (String s : regexArr) {
+            if (filePath.contains(s)) {
+                log.info(&quot;合法文件，允许放行 - {}&quot;, filePath);
+
+                //设置header键值，用于多路复用（source根据头键值不同进行不同channel的选择）
+                headerValue = s;
+                Event event1;
+                for (Event event : list){
+                    event1 = intercept(event);
+                    if (event1 != null){
+                        result.add(event1);
+                    }
+                }
+                return result;
+            }
+        }
+        log.info(&quot;拦截器拦截非法文件 - {}&quot;,filePath);
+        return result;
+    }
+
+    @Override
+    public void close() {
+        log.info(&quot;拦截器关闭&quot;);
+    }
+
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br></div></div><p></p> <h2 id="五、windows下flume的启动"><a href="#五、windows下flume的启动" class="header-anchor">#</a> 五、windows下flume的启动</h2> <ul><li><p>打开cmd命令进入flume的bin文件中</p></li> <li><p>使用如下命令启动：（windows启动需要注释掉部分代码）</p></li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>flume-ng agent --conf ../conf --conf-file ../conf/example.conf --name a1 -property flume.root.logger=INFO,console
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p></p> <h2 id="六、异常及解决"><a href="#六、异常及解决" class="header-anchor">#</a> 六、异常及解决：</h2> <ul><li>参考：<code>Flume收集日志 - windows（配置版）</code></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2022-8-28 10:03:47 ├F10: AM┤</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html">
+        Flume收集日志 - windows（实战版二）
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1c337853.js" defer></script><script src="/assets/js/3.b02e7092.js" defer></script><script src="/assets/js/101.c905564f.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、什么是AOP？ | Java 知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理, MySQL, ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目...">
+    <meta name="robots" content="all">
+    <meta name="author" content="pdai">
+    <meta name="keywords" content="Java 全栈知识体系, java体系, java知识体系, java框架,java详解,java学习路线,java spring, java面试, 知识体系, java技术体系, java编程, java编程指南,java开发体系, java开发,java教程,java,java数据结构, 算法, 开发基础">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preload" href="/assets/css/0.styles.2e713c08.css" as="style"><link rel="preload" href="/assets/js/app.1c337853.js" as="script"><link rel="preload" href="/assets/js/3.b02e7092.js" as="script"><link rel="preload" href="/assets/js/45.2d86fd58.js" as="script"><link rel="prefetch" href="/assets/js/10.ceb3101a.js"><link rel="prefetch" href="/assets/js/100.b09a4b02.js"><link rel="prefetch" href="/assets/js/101.c905564f.js"><link rel="prefetch" href="/assets/js/102.b0347c86.js"><link rel="prefetch" href="/assets/js/103.0b941500.js"><link rel="prefetch" href="/assets/js/104.aa9d77de.js"><link rel="prefetch" href="/assets/js/105.4cbc1bc6.js"><link rel="prefetch" href="/assets/js/106.6a6b364e.js"><link rel="prefetch" href="/assets/js/107.4376147f.js"><link rel="prefetch" href="/assets/js/108.72d51d06.js"><link rel="prefetch" href="/assets/js/109.df0075ec.js"><link rel="prefetch" href="/assets/js/11.99f846c6.js"><link rel="prefetch" href="/assets/js/110.57cc32a8.js"><link rel="prefetch" href="/assets/js/111.982f4d8b.js"><link rel="prefetch" href="/assets/js/112.38bfda33.js"><link rel="prefetch" href="/assets/js/113.2d834ece.js"><link rel="prefetch" href="/assets/js/114.7600e6b5.js"><link rel="prefetch" href="/assets/js/115.c53dd888.js"><link rel="prefetch" href="/assets/js/116.dd8a6a65.js"><link rel="prefetch" href="/assets/js/117.8511fe15.js"><link rel="prefetch" href="/assets/js/118.ade530c5.js"><link rel="prefetch" href="/assets/js/119.f23bf053.js"><link rel="prefetch" href="/assets/js/12.743bef58.js"><link rel="prefetch" href="/assets/js/120.e0a8b7ea.js"><link rel="prefetch" href="/assets/js/121.ffc1f611.js"><link rel="prefetch" href="/assets/js/122.42847824.js"><link rel="prefetch" href="/assets/js/123.50e0eada.js"><link rel="prefetch" href="/assets/js/124.25d50192.js"><link rel="prefetch" href="/assets/js/125.e17385d1.js"><link rel="prefetch" href="/assets/js/126.904ed144.js"><link rel="prefetch" href="/assets/js/127.5a938814.js"><link rel="prefetch" href="/assets/js/128.b353e3a1.js"><link rel="prefetch" href="/assets/js/129.2c18e0d3.js"><link rel="prefetch" href="/assets/js/13.adb5d444.js"><link rel="prefetch" href="/assets/js/130.69a2b37b.js"><link rel="prefetch" href="/assets/js/131.c02089a1.js"><link rel="prefetch" href="/assets/js/132.bc2caf02.js"><link rel="prefetch" href="/assets/js/133.5b625fea.js"><link rel="prefetch" href="/assets/js/134.c0444d3e.js"><link rel="prefetch" href="/assets/js/135.570145d4.js"><link rel="prefetch" href="/assets/js/136.14dc0146.js"><link rel="prefetch" href="/assets/js/137.5571aeca.js"><link rel="prefetch" href="/assets/js/138.d0e7ecd3.js"><link rel="prefetch" href="/assets/js/139.8122e620.js"><link rel="prefetch" href="/assets/js/14.062ad1e9.js"><link rel="prefetch" href="/assets/js/140.a4157b9e.js"><link rel="prefetch" href="/assets/js/141.a21e8c95.js"><link rel="prefetch" href="/assets/js/142.b77c9e6a.js"><link rel="prefetch" href="/assets/js/143.6ed28be3.js"><link rel="prefetch" href="/assets/js/144.4ed950c5.js"><link rel="prefetch" href="/assets/js/145.defcbdcf.js"><link rel="prefetch" href="/assets/js/146.1601f6b6.js"><link rel="prefetch" href="/assets/js/147.bcf8cfce.js"><link rel="prefetch" href="/assets/js/148.06c95943.js"><link rel="prefetch" href="/assets/js/149.89cf96c2.js"><link rel="prefetch" href="/assets/js/15.b9719217.js"><link rel="prefetch" href="/assets/js/150.40482dd5.js"><link rel="prefetch" href="/assets/js/151.5c02beef.js"><link rel="prefetch" href="/assets/js/152.1c7a84a6.js"><link rel="prefetch" href="/assets/js/153.fde1ee98.js"><link rel="prefetch" href="/assets/js/154.11c91a1d.js"><link rel="prefetch" href="/assets/js/155.083704c8.js"><link rel="prefetch" href="/assets/js/156.5463b99a.js"><link rel="prefetch" href="/assets/js/157.560a333f.js"><link rel="prefetch" href="/assets/js/158.299f1eab.js"><link rel="prefetch" href="/assets/js/159.9abe708d.js"><link rel="prefetch" href="/assets/js/16.fca7d7b7.js"><link rel="prefetch" href="/assets/js/160.4ff46a0f.js"><link rel="prefetch" href="/assets/js/161.a6c486b5.js"><link rel="prefetch" href="/assets/js/162.bef29922.js"><link rel="prefetch" href="/assets/js/163.7cf2468e.js"><link rel="prefetch" href="/assets/js/164.27c6a07e.js"><link rel="prefetch" href="/assets/js/165.9279b6b4.js"><link rel="prefetch" href="/assets/js/166.1246f61a.js"><link rel="prefetch" href="/assets/js/167.9c2dbfa7.js"><link rel="prefetch" href="/assets/js/168.a40fd447.js"><link rel="prefetch" href="/assets/js/169.eaaa3b21.js"><link rel="prefetch" href="/assets/js/17.63c7bd06.js"><link rel="prefetch" href="/assets/js/170.38b55274.js"><link rel="prefetch" href="/assets/js/171.0aa03f11.js"><link rel="prefetch" href="/assets/js/172.a9b46f05.js"><link rel="prefetch" href="/assets/js/173.79282476.js"><link rel="prefetch" href="/assets/js/174.c0183c86.js"><link rel="prefetch" href="/assets/js/175.478a47f9.js"><link rel="prefetch" href="/assets/js/176.75a5a27f.js"><link rel="prefetch" href="/assets/js/18.52e671f4.js"><link rel="prefetch" href="/assets/js/19.448d0875.js"><link rel="prefetch" href="/assets/js/20.2cef79e7.js"><link rel="prefetch" href="/assets/js/21.aa3006bb.js"><link rel="prefetch" href="/assets/js/22.710d6e2c.js"><link rel="prefetch" href="/assets/js/23.ad2e9c92.js"><link rel="prefetch" href="/assets/js/24.020145fe.js"><link rel="prefetch" href="/assets/js/25.ada5f251.js"><link rel="prefetch" href="/assets/js/26.d22d138b.js"><link rel="prefetch" href="/assets/js/27.b3cf1201.js"><link rel="prefetch" href="/assets/js/28.5ff0bfb8.js"><link rel="prefetch" href="/assets/js/29.485f2b8b.js"><link rel="prefetch" href="/assets/js/30.2317d6ce.js"><link rel="prefetch" href="/assets/js/31.c4451eaa.js"><link rel="prefetch" href="/assets/js/32.6b847218.js"><link rel="prefetch" href="/assets/js/33.87c3b3aa.js"><link rel="prefetch" href="/assets/js/34.e38c6dd2.js"><link rel="prefetch" href="/assets/js/35.d279db47.js"><link rel="prefetch" href="/assets/js/36.f753589b.js"><link rel="prefetch" href="/assets/js/37.4a6a2e39.js"><link rel="prefetch" href="/assets/js/38.ae8bd94d.js"><link rel="prefetch" href="/assets/js/39.c59385c5.js"><link rel="prefetch" href="/assets/js/4.775276f1.js"><link rel="prefetch" href="/assets/js/40.ec09fa5c.js"><link rel="prefetch" href="/assets/js/41.38dd0189.js"><link rel="prefetch" href="/assets/js/42.eb939c7b.js"><link rel="prefetch" href="/assets/js/43.89c78c22.js"><link rel="prefetch" href="/assets/js/44.79d9957a.js"><link rel="prefetch" href="/assets/js/46.b9bc9b70.js"><link rel="prefetch" href="/assets/js/47.ada08b04.js"><link rel="prefetch" href="/assets/js/48.539528a1.js"><link rel="prefetch" href="/assets/js/49.6fbfbbaa.js"><link rel="prefetch" href="/assets/js/5.eee55e85.js"><link rel="prefetch" href="/assets/js/50.3c0cf41c.js"><link rel="prefetch" href="/assets/js/51.5325c960.js"><link rel="prefetch" href="/assets/js/52.3b1cd138.js"><link rel="prefetch" href="/assets/js/53.78d19eef.js"><link rel="prefetch" href="/assets/js/54.5e468d37.js"><link rel="prefetch" href="/assets/js/55.d9a8dcb6.js"><link rel="prefetch" href="/assets/js/56.9d93de98.js"><link rel="prefetch" href="/assets/js/57.f21c715f.js"><link rel="prefetch" href="/assets/js/58.1475a83f.js"><link rel="prefetch" href="/assets/js/59.819b29ae.js"><link rel="prefetch" href="/assets/js/6.8e026274.js"><link rel="prefetch" href="/assets/js/60.41a3a7a0.js"><link rel="prefetch" href="/assets/js/61.e83bc878.js"><link rel="prefetch" href="/assets/js/62.329c8a5a.js"><link rel="prefetch" href="/assets/js/63.169b3b2c.js"><link rel="prefetch" href="/assets/js/64.47f034f3.js"><link rel="prefetch" href="/assets/js/65.0d8bd679.js"><link rel="prefetch" href="/assets/js/66.d23e9e5e.js"><link rel="prefetch" href="/assets/js/67.f9abb6fc.js"><link rel="prefetch" href="/assets/js/68.67f072df.js"><link rel="prefetch" href="/assets/js/69.a733e18a.js"><link rel="prefetch" href="/assets/js/7.c5a82798.js"><link rel="prefetch" href="/assets/js/70.752d07fc.js"><link rel="prefetch" href="/assets/js/71.c171bfd0.js"><link rel="prefetch" href="/assets/js/72.ebcd692e.js"><link rel="prefetch" href="/assets/js/73.00dab538.js"><link rel="prefetch" href="/assets/js/74.7cbd77ae.js"><link rel="prefetch" href="/assets/js/75.fad5345b.js"><link rel="prefetch" href="/assets/js/76.a5544c13.js"><link rel="prefetch" href="/assets/js/77.153c5242.js"><link rel="prefetch" href="/assets/js/78.dd6275bf.js"><link rel="prefetch" href="/assets/js/79.824b3d5e.js"><link rel="prefetch" href="/assets/js/8.dc522fd4.js"><link rel="prefetch" href="/assets/js/80.a40f869a.js"><link rel="prefetch" href="/assets/js/81.45fe78e3.js"><link rel="prefetch" href="/assets/js/82.cec07a57.js"><link rel="prefetch" href="/assets/js/83.4b57cb83.js"><link rel="prefetch" href="/assets/js/84.c39ee6cb.js"><link rel="prefetch" href="/assets/js/85.a32409a4.js"><link rel="prefetch" href="/assets/js/86.16a7b081.js"><link rel="prefetch" href="/assets/js/87.2c4f62cb.js"><link rel="prefetch" href="/assets/js/88.bd227216.js"><link rel="prefetch" href="/assets/js/89.ac4201b8.js"><link rel="prefetch" href="/assets/js/9.df3cd7fc.js"><link rel="prefetch" href="/assets/js/90.bf6b197a.js"><link rel="prefetch" href="/assets/js/91.9ba4ee3f.js"><link rel="prefetch" href="/assets/js/92.2972038d.js"><link rel="prefetch" href="/assets/js/93.5f3249d9.js"><link rel="prefetch" href="/assets/js/94.4da2a6f4.js"><link rel="prefetch" href="/assets/js/95.8ee0a7a7.js"><link rel="prefetch" href="/assets/js/96.6c75956c.js"><link rel="prefetch" href="/assets/js/97.eb069d33.js"><link rel="prefetch" href="/assets/js/98.d099974a.js"><link rel="prefetch" href="/assets/js/99.f53424f3.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.63928db4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2e713c08.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Java 知识体系</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Spring Boot</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="sidebar-link">Spring AOP实现自动读写分离</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="sidebar-link">SpringBoot2.0静态变量注入及过滤器的使用</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="sidebar-link">SpringBoot定时任务及redis分布式锁创建</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="sidebar-link">SpringBoot实现全局异常的捕获</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="sidebar-link">SpringBoot整合Junit4</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="sidebar-link">SpringBoot整合Maven实现环境隔离</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="sidebar-link">SpringBoot整合Spring Session实现单点登陆</a></li><li><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="sidebar-link">SpringBoot整合redis</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Spring Cloud</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="sidebar-link">SpringCloud整合ELK</a></li><li><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="sidebar-link">SpringCloud整合WebSocket</a></li><li><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="sidebar-link">SpringCloud整合Zipkin + Slethu</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="active sidebar-link">Spring AOP</a></li><li><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="sidebar-link">Spring Bean</a></li><li><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="sidebar-link">Spring IOC</a></li><li><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="sidebar-link">Spring高级应用</a></li><li><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="sidebar-link">认证授权（OAuth、JWT）</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="一、什么是aop"><a href="#一、什么是aop" class="header-anchor">#</a> 一、什么是AOP？</h2> <h4 id="_1-1、aop的定义"><a href="#_1-1、aop的定义" class="header-anchor">#</a> 1.1、AOP的定义</h4> <ul><li>AOP即<code>面向切面编程</code>，相比OOP —— 面向对象编程（最基本单位为<code>类和实例</code>），AOP的基本单位为<code>切面</code>。AOP编程主要可以用在如：<code>权限校验</code>、<code>日志服务</code>、<code>事务控制</code>、<code>异常处理</code>等，能够对业务进行统一管理编程，<code>减少了代码的冗余</code>，<code>降低了业务代码也服务管理部分的耦合程度</code>，同时<code>提高了代码的可维护性</code>，对下面是Spring中关于AOP的定义：</li></ul> <blockquote><p>面向切面——Spring提供了面向切面编程的丰富支持，允许通过分离应用的<code>业务逻辑与系统级服务</code>（例如审计（auditing）和事务（transaction）管理）进行内聚性的开发。应用对象只实现它们应该做的——完成业务逻辑——仅此而已。它们并不负责（甚至是意识）其它的系统级关注点，例如日志或事务支持。</p></blockquote> <h4 id="_1-2、aop的的基本概念"><a href="#_1-2、aop的的基本概念" class="header-anchor">#</a> 1.2、AOP的的基本概念</h4> <ul><li><p><code>通知/增强（Adivce） = 定位到方法后做什么事</code></p> <ul><li>Before：前置通知（方法调用前）</li> <li>After：后置通知（方法调用后，无论是否成功，相当于<code>Finally</code>代码块）</li> <li>After-returning：最终通知（方法调用成功后）</li> <li>After-throwing：异常通知（在方法抛出异常后调用通知）</li> <li>Around：环绕通知（可以在目标方法前或方法后执行，即可以在环绕方法里调用目标方法）</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Around(&quot;execution(...)&quot;)
+public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    System.out.println(&quot;我是环绕通知前....&quot;);
+    //执行目标函数
+    Object obj= (Object) joinPoint.proceed();
+    System.out.println(&quot;我是环绕通知后....&quot;);
+    return obj;
+}
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></li> <li><p><code>切点（Pointcut） = 定位到具体方法的表达式</code></p> <ul><li>切点可以认为是对应某个方法的点（可以被AOP扫描到的某个方法），它通常与通知一起使用，比如，不同方法的权限校验，使用AOP进行编程的话这几个方法属于不同的切点，多个切点则组成了切面。
+<ul><li><code>execution(* com.zdy..*(..))</code>：com.zdy包下所有类的所有方法.</li> <li><code>execution(* com.zdy.Dog.*(..))</code>: Dog类下的所有方法.</li></ul></li></ul></li> <li><p><code>连接点（Join point）</code></p> <ul><li>连接点是一个比较虚拟的概念，可以理解为满足所有切点扫描的所有<code>时机</code>，每个连接点可以将切面代码插入到其中，并为之添加新的行为，如调用某个接口时，异常抛出时，或者修改某个字段时等。</li></ul></li> <li><p><code>切面（Aspect） = Advice + Pointcut</code></p> <ul><li>切面是切点和通知的集合，一般单独作为一个类进行管理。通知和切点共同定义了关于切面的全部内容，它在什么时候（Advice的时间）、什么地方（切点）完成什么功能（Advice的功能）。</li></ul></li> <li><p><code>引入（Introduction）</code></p> <ul><li>引用允许我们向现有的类添加新的方法或者属性</li></ul></li> <li><p><code>织入（Weaving）</code></p> <ul><li>组装方面来创建一个被通知对象。这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯Java AOP框架一样，在<code>运行时</code>完成织入。</li></ul></li></ul> <p></p> <h2 id="二、spring对aop的支持"><a href="#二、spring对aop的支持" class="header-anchor">#</a> 二、Spring对AOP的支持</h2> <h4 id="_2-1、spring的代理模式"><a href="#_2-1、spring的代理模式" class="header-anchor">#</a> 2.1、Spring的代理模式</h4> <ul><li>代理模式：代理模式在Java中是一种比较常见的设计模式。通过对目标类创建代理类，进而对目标类进行功能增强。包括以下三要素：共同接口、目标类、代理类</li> <li>AOP思想的实现一般都是基于<code>代理模式</code>，在JAVA中一般采用<code>JDK动态代理</code>，但是由于JDK动态代理只能代理接口，如果代理类的话就不行了。因此，Sping AOP会自动进行切换，因为Spring同时支持<code>JDK动态代理</code>、<code>CGLIB</code>和<code>AspectJ</code>，当对象有实现接口时，会默认采用JDK动态代理，否则使用CGLIB代理
+<ul><li><p>如果目标对象的实现类<code>实现了接口</code>，Spring AOP 将会采用 <code>JDK 动态代理</code> 来生成 AOP 代理类；</p> <ul><li>实现了接口如何强制使用CGLIB实现AOP？</li> <li>（1）添加CGLIB库，SPRING_HOME/cglib/*.jar</li> <li>（2）在spring配置文件中加入<code>&lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</code></li></ul></li> <li><p>如果目标对象的实现类<code>没有实现接口</code>，Spring AOP 将会采用 <code>CGLIB</code> 来生成 AOP 代理类——不过这个选择过程对开发者完全透明、开发者也无需关心</p></li></ul></li></ul> <h4 id="_2-2、cglib和jdk动态代理的区别"><a href="#_2-2、cglib和jdk动态代理的区别" class="header-anchor">#</a> 2.2、CGLIB和JDK动态代理的区别</h4> <p><strong>a、原理区别</strong>：</p> <ul><li>JDK动态代理是利用<code>反射机制</code>生成一个实现代理接口的匿名类，在调用具体方法前调用<code>InvokeHandler</code>来处理。</li> <li>CGLIB是利用<code>asm开源包</code>，将代理对象类的class文件加载进来，通过修改其<code>字节码</code>生成子类来处理。</li></ul> <p><strong>b、功能区别</strong>：</p> <ul><li>JDK动态代理只能对<code>实现了接口的类</code>生成代理，而不能针对类。</li> <li>CGLIB是<code>针对类实现代理</code>，主要是对指定的类生成一个子类，覆盖其中的方法，因为是继承，所以该类或方法最好不要声明成final</li></ul> <h2 id="三、spring-aop配置"><a href="#三、spring-aop配置" class="header-anchor">#</a> 三、SpRing AOP配置</h2> <p><strong>切面配置</strong>：</p> <ul><li>XML配置</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;aop:config&gt;
+    &lt;!-- 这是定义一个切面，切面是切点和通知的集合--&gt;
+    &lt;aop:aspect id=&quot;do&quot; ref=&quot;PermissionVerification&quot;&gt;
+    	&lt;!-- 定义切点 ，后面是expression语言，表示包括该接口中定义的所有方法都会被执行--&gt;
+        &lt;aop:pointcut id=&quot;point&quot; expression=&quot;execution(* wokao666.club.aop.spring01.Subject.*(..))&quot; /&gt;
+        &lt;!-- 定义通知 --&gt;
+        &lt;aop:before method=&quot;canLogin&quot; pointcut-ref=&quot;point&quot; /&gt;
+        &lt;aop:after method=&quot;saveMessage&quot; pointcut-ref=&quot;point&quot; /&gt;
+    &lt;/aop:aspect&gt;
+&lt;/aop:config&gt;
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><ul><li>注解配置（AspectJ注解）
+<ul><li>AspectJ是一个AOP框架，它能在<code>编译期</code>对JAVA代码进行AOP编译，让其具有AOP功能，AspectJ是目前实现AOP框架中最成熟的，并且与JAVA完全兼容。AspectJ单独就是一门语言，它需要专门的编译器(ajc编译器)，Spring很机智回避了这点，转向采用动态代理技术的实现原理来构建Spring AOP的内部机制（<code>动态织入</code>），而AspectJ是<code>静态织入</code>，这是最根本的区别，并且Sping AOP<code>不尝试提供完整的AOP功能</code>，其注重的是Spring AOP与Spring IOC容器的结合，借助IOC优势处理切面问题。Spring AOP只是整合了AspectJ的那套注解，底层仍然是采用Spring AOP的<code>动态代理技术</code>实现。</li></ul></li></ul> <p><strong>切面类</strong>：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>@Aspect //声明自己是一个切面类
+public class MyAspect {
+    /**
+     * 前置通知
+     */
+     // @Before是增强中的方位
+     // @Before括号中的就是切入点了
+     // before()就是传说的增强(建言):说白了，就是要干啥事.
+    @Before(&quot;execution(* com.zdy..*(..))&quot;)
+    public void before(){
+        System.out.println(&quot;前置通知....&quot;);
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>XML文件</strong>：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>//开启AspectJ功能.
+&lt;aop:aspectj-autoproxy /&gt;
+
+&lt;bean id=&quot;dog&quot; class=&quot;com.zdy.Dog&quot; /&gt;
+&lt;!-- 定义aspect类 --&gt;
+&lt;bean name=&quot;myAspect&quot; class=&quot;com.zdy.MyAspect&quot;/&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p></p> <h4 id="四、参考"><a href="#四、参考" class="header-anchor">#</a> 四、参考</h4> <ul><li><a href="https://juejin.im/post/5aa7818af265da23844040c6" target="_blank" rel="noopener noreferrer">参考一<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.cnblogs.com/leifei/p/8263448.html" target="_blank" rel="noopener noreferrer">参考二<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.im/post/5a55af9e518825734d14813f" target="_blank" rel="noopener noreferrer">参考三<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2022-11-20 11:40:17 ├F10: PM┤</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="prev">
+        SpringCloud整合Zipkin + Slethu
+      </a></span> <span class="next"><a href="/posts/Spring/Spring Framework/Spring Bean.html">
+        Spring Bean
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1c337853.js" defer></script><script src="/assets/js/3.b02e7092.js" defer></script><script src="/assets/js/45.2d86fd58.js" defer></script>
+  </body>
+</html>

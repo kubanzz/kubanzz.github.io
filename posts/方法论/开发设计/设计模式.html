@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、六大设计原则 | Java 知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理, MySQL, ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目...">
+    <meta name="robots" content="all">
+    <meta name="author" content="pdai">
+    <meta name="keywords" content="Java 全栈知识体系, java体系, java知识体系, java框架,java详解,java学习路线,java spring, java面试, 知识体系, java技术体系, java编程, java编程指南,java开发体系, java开发,java教程,java,java数据结构, 算法, 开发基础">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preload" href="/assets/css/0.styles.2e713c08.css" as="style"><link rel="preload" href="/assets/js/app.1c337853.js" as="script"><link rel="preload" href="/assets/js/3.b02e7092.js" as="script"><link rel="preload" href="/assets/js/161.a6c486b5.js" as="script"><link rel="prefetch" href="/assets/js/10.ceb3101a.js"><link rel="prefetch" href="/assets/js/100.b09a4b02.js"><link rel="prefetch" href="/assets/js/101.c905564f.js"><link rel="prefetch" href="/assets/js/102.b0347c86.js"><link rel="prefetch" href="/assets/js/103.0b941500.js"><link rel="prefetch" href="/assets/js/104.aa9d77de.js"><link rel="prefetch" href="/assets/js/105.4cbc1bc6.js"><link rel="prefetch" href="/assets/js/106.6a6b364e.js"><link rel="prefetch" href="/assets/js/107.4376147f.js"><link rel="prefetch" href="/assets/js/108.72d51d06.js"><link rel="prefetch" href="/assets/js/109.df0075ec.js"><link rel="prefetch" href="/assets/js/11.99f846c6.js"><link rel="prefetch" href="/assets/js/110.57cc32a8.js"><link rel="prefetch" href="/assets/js/111.982f4d8b.js"><link rel="prefetch" href="/assets/js/112.38bfda33.js"><link rel="prefetch" href="/assets/js/113.2d834ece.js"><link rel="prefetch" href="/assets/js/114.7600e6b5.js"><link rel="prefetch" href="/assets/js/115.c53dd888.js"><link rel="prefetch" href="/assets/js/116.dd8a6a65.js"><link rel="prefetch" href="/assets/js/117.8511fe15.js"><link rel="prefetch" href="/assets/js/118.ade530c5.js"><link rel="prefetch" href="/assets/js/119.f23bf053.js"><link rel="prefetch" href="/assets/js/12.743bef58.js"><link rel="prefetch" href="/assets/js/120.e0a8b7ea.js"><link rel="prefetch" href="/assets/js/121.ffc1f611.js"><link rel="prefetch" href="/assets/js/122.42847824.js"><link rel="prefetch" href="/assets/js/123.50e0eada.js"><link rel="prefetch" href="/assets/js/124.25d50192.js"><link rel="prefetch" href="/assets/js/125.e17385d1.js"><link rel="prefetch" href="/assets/js/126.904ed144.js"><link rel="prefetch" href="/assets/js/127.5a938814.js"><link rel="prefetch" href="/assets/js/128.b353e3a1.js"><link rel="prefetch" href="/assets/js/129.2c18e0d3.js"><link rel="prefetch" href="/assets/js/13.adb5d444.js"><link rel="prefetch" href="/assets/js/130.69a2b37b.js"><link rel="prefetch" href="/assets/js/131.c02089a1.js"><link rel="prefetch" href="/assets/js/132.bc2caf02.js"><link rel="prefetch" href="/assets/js/133.5b625fea.js"><link rel="prefetch" href="/assets/js/134.c0444d3e.js"><link rel="prefetch" href="/assets/js/135.570145d4.js"><link rel="prefetch" href="/assets/js/136.14dc0146.js"><link rel="prefetch" href="/assets/js/137.5571aeca.js"><link rel="prefetch" href="/assets/js/138.d0e7ecd3.js"><link rel="prefetch" href="/assets/js/139.8122e620.js"><link rel="prefetch" href="/assets/js/14.062ad1e9.js"><link rel="prefetch" href="/assets/js/140.a4157b9e.js"><link rel="prefetch" href="/assets/js/141.a21e8c95.js"><link rel="prefetch" href="/assets/js/142.b77c9e6a.js"><link rel="prefetch" href="/assets/js/143.6ed28be3.js"><link rel="prefetch" href="/assets/js/144.4ed950c5.js"><link rel="prefetch" href="/assets/js/145.defcbdcf.js"><link rel="prefetch" href="/assets/js/146.1601f6b6.js"><link rel="prefetch" href="/assets/js/147.bcf8cfce.js"><link rel="prefetch" href="/assets/js/148.06c95943.js"><link rel="prefetch" href="/assets/js/149.89cf96c2.js"><link rel="prefetch" href="/assets/js/15.b9719217.js"><link rel="prefetch" href="/assets/js/150.40482dd5.js"><link rel="prefetch" href="/assets/js/151.5c02beef.js"><link rel="prefetch" href="/assets/js/152.1c7a84a6.js"><link rel="prefetch" href="/assets/js/153.fde1ee98.js"><link rel="prefetch" href="/assets/js/154.11c91a1d.js"><link rel="prefetch" href="/assets/js/155.083704c8.js"><link rel="prefetch" href="/assets/js/156.5463b99a.js"><link rel="prefetch" href="/assets/js/157.560a333f.js"><link rel="prefetch" href="/assets/js/158.299f1eab.js"><link rel="prefetch" href="/assets/js/159.9abe708d.js"><link rel="prefetch" href="/assets/js/16.fca7d7b7.js"><link rel="prefetch" href="/assets/js/160.4ff46a0f.js"><link rel="prefetch" href="/assets/js/162.bef29922.js"><link rel="prefetch" href="/assets/js/163.7cf2468e.js"><link rel="prefetch" href="/assets/js/164.27c6a07e.js"><link rel="prefetch" href="/assets/js/165.9279b6b4.js"><link rel="prefetch" href="/assets/js/166.1246f61a.js"><link rel="prefetch" href="/assets/js/167.9c2dbfa7.js"><link rel="prefetch" href="/assets/js/168.a40fd447.js"><link rel="prefetch" href="/assets/js/169.eaaa3b21.js"><link rel="prefetch" href="/assets/js/17.63c7bd06.js"><link rel="prefetch" href="/assets/js/170.38b55274.js"><link rel="prefetch" href="/assets/js/171.0aa03f11.js"><link rel="prefetch" href="/assets/js/172.a9b46f05.js"><link rel="prefetch" href="/assets/js/173.79282476.js"><link rel="prefetch" href="/assets/js/174.c0183c86.js"><link rel="prefetch" href="/assets/js/175.478a47f9.js"><link rel="prefetch" href="/assets/js/176.75a5a27f.js"><link rel="prefetch" href="/assets/js/18.52e671f4.js"><link rel="prefetch" href="/assets/js/19.448d0875.js"><link rel="prefetch" href="/assets/js/20.2cef79e7.js"><link rel="prefetch" href="/assets/js/21.aa3006bb.js"><link rel="prefetch" href="/assets/js/22.710d6e2c.js"><link rel="prefetch" href="/assets/js/23.ad2e9c92.js"><link rel="prefetch" href="/assets/js/24.020145fe.js"><link rel="prefetch" href="/assets/js/25.ada5f251.js"><link rel="prefetch" href="/assets/js/26.d22d138b.js"><link rel="prefetch" href="/assets/js/27.b3cf1201.js"><link rel="prefetch" href="/assets/js/28.5ff0bfb8.js"><link rel="prefetch" href="/assets/js/29.485f2b8b.js"><link rel="prefetch" href="/assets/js/30.2317d6ce.js"><link rel="prefetch" href="/assets/js/31.c4451eaa.js"><link rel="prefetch" href="/assets/js/32.6b847218.js"><link rel="prefetch" href="/assets/js/33.87c3b3aa.js"><link rel="prefetch" href="/assets/js/34.e38c6dd2.js"><link rel="prefetch" href="/assets/js/35.d279db47.js"><link rel="prefetch" href="/assets/js/36.f753589b.js"><link rel="prefetch" href="/assets/js/37.4a6a2e39.js"><link rel="prefetch" href="/assets/js/38.ae8bd94d.js"><link rel="prefetch" href="/assets/js/39.c59385c5.js"><link rel="prefetch" href="/assets/js/4.775276f1.js"><link rel="prefetch" href="/assets/js/40.ec09fa5c.js"><link rel="prefetch" href="/assets/js/41.38dd0189.js"><link rel="prefetch" href="/assets/js/42.eb939c7b.js"><link rel="prefetch" href="/assets/js/43.89c78c22.js"><link rel="prefetch" href="/assets/js/44.79d9957a.js"><link rel="prefetch" href="/assets/js/45.2d86fd58.js"><link rel="prefetch" href="/assets/js/46.b9bc9b70.js"><link rel="prefetch" href="/assets/js/47.ada08b04.js"><link rel="prefetch" href="/assets/js/48.539528a1.js"><link rel="prefetch" href="/assets/js/49.6fbfbbaa.js"><link rel="prefetch" href="/assets/js/5.eee55e85.js"><link rel="prefetch" href="/assets/js/50.3c0cf41c.js"><link rel="prefetch" href="/assets/js/51.5325c960.js"><link rel="prefetch" href="/assets/js/52.3b1cd138.js"><link rel="prefetch" href="/assets/js/53.78d19eef.js"><link rel="prefetch" href="/assets/js/54.5e468d37.js"><link rel="prefetch" href="/assets/js/55.d9a8dcb6.js"><link rel="prefetch" href="/assets/js/56.9d93de98.js"><link rel="prefetch" href="/assets/js/57.f21c715f.js"><link rel="prefetch" href="/assets/js/58.1475a83f.js"><link rel="prefetch" href="/assets/js/59.819b29ae.js"><link rel="prefetch" href="/assets/js/6.8e026274.js"><link rel="prefetch" href="/assets/js/60.41a3a7a0.js"><link rel="prefetch" href="/assets/js/61.e83bc878.js"><link rel="prefetch" href="/assets/js/62.329c8a5a.js"><link rel="prefetch" href="/assets/js/63.169b3b2c.js"><link rel="prefetch" href="/assets/js/64.47f034f3.js"><link rel="prefetch" href="/assets/js/65.0d8bd679.js"><link rel="prefetch" href="/assets/js/66.d23e9e5e.js"><link rel="prefetch" href="/assets/js/67.f9abb6fc.js"><link rel="prefetch" href="/assets/js/68.67f072df.js"><link rel="prefetch" href="/assets/js/69.a733e18a.js"><link rel="prefetch" href="/assets/js/7.c5a82798.js"><link rel="prefetch" href="/assets/js/70.752d07fc.js"><link rel="prefetch" href="/assets/js/71.c171bfd0.js"><link rel="prefetch" href="/assets/js/72.ebcd692e.js"><link rel="prefetch" href="/assets/js/73.00dab538.js"><link rel="prefetch" href="/assets/js/74.7cbd77ae.js"><link rel="prefetch" href="/assets/js/75.fad5345b.js"><link rel="prefetch" href="/assets/js/76.a5544c13.js"><link rel="prefetch" href="/assets/js/77.153c5242.js"><link rel="prefetch" href="/assets/js/78.dd6275bf.js"><link rel="prefetch" href="/assets/js/79.824b3d5e.js"><link rel="prefetch" href="/assets/js/8.dc522fd4.js"><link rel="prefetch" href="/assets/js/80.a40f869a.js"><link rel="prefetch" href="/assets/js/81.45fe78e3.js"><link rel="prefetch" href="/assets/js/82.cec07a57.js"><link rel="prefetch" href="/assets/js/83.4b57cb83.js"><link rel="prefetch" href="/assets/js/84.c39ee6cb.js"><link rel="prefetch" href="/assets/js/85.a32409a4.js"><link rel="prefetch" href="/assets/js/86.16a7b081.js"><link rel="prefetch" href="/assets/js/87.2c4f62cb.js"><link rel="prefetch" href="/assets/js/88.bd227216.js"><link rel="prefetch" href="/assets/js/89.ac4201b8.js"><link rel="prefetch" href="/assets/js/9.df3cd7fc.js"><link rel="prefetch" href="/assets/js/90.bf6b197a.js"><link rel="prefetch" href="/assets/js/91.9ba4ee3f.js"><link rel="prefetch" href="/assets/js/92.2972038d.js"><link rel="prefetch" href="/assets/js/93.5f3249d9.js"><link rel="prefetch" href="/assets/js/94.4da2a6f4.js"><link rel="prefetch" href="/assets/js/95.8ee0a7a7.js"><link rel="prefetch" href="/assets/js/96.6c75956c.js"><link rel="prefetch" href="/assets/js/97.eb069d33.js"><link rel="prefetch" href="/assets/js/98.d099974a.js"><link rel="prefetch" href="/assets/js/99.f53424f3.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.63928db4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2e713c08.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Java 知识体系</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>方法论</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading"><span>基础理论</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="sidebar-link">事务理论-ACID</a></li><li><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="sidebar-link">分布式一致性算法</a></li><li><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="sidebar-link">分布式事务算法（2PC, 3PC, TCC)</a></li><li><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="sidebar-link">分布式理论（BASE）</a></li><li><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="sidebar-link">分布式理论（CAP）</a></li><li><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="sidebar-link">分布式规范（XA）</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading open"><span>开发设计</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/方法论/开发设计/RESTful.html" class="sidebar-link">RESTful</a></li><li><a href="/posts/方法论/开发设计/UML.html" class="sidebar-link">UML</a></li><li><a href="/posts/方法论/开发设计/设计模式.html" class="active sidebar-link">设计模式</a></li></ul></section></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="一、六大设计原则"><a href="#一、六大设计原则" class="header-anchor">#</a> 一、六大设计原则</h2> <h3 id="开闭原则-对修改"><a href="#开闭原则-对修改" class="header-anchor">#</a> 开闭原则（对修改）</h3> <blockquote><p>一个软件实体应当对扩展开放，对修改关闭。即软件实体应尽量在不修改原有代码的情况下进行扩展。</p> <p>本质：扩展新业务新代码时，可以调用（重利用）原来的代码，但是不要去修改。</p></blockquote> <h3 id="单一原则-高内聚"><a href="#单一原则-高内聚" class="header-anchor">#</a> 单一原则（高内聚）</h3> <blockquote><p>一个类只负责一个功能领域中的相应职责。</p> <p>本质：一个类承担的职责越少，划分越细，则其<strong>可读性、复用性</strong>更高。</p></blockquote> <h3 id="迪米特法则-最少知道原则-低耦合"><a href="#迪米特法则-最少知道原则-低耦合" class="header-anchor">#</a> 迪米特法则（最少知道原则）（低耦合）</h3> <blockquote><p>一个软件实体应当尽可能少地与其他实体发生相互作用。</p> <p>本质：降低类与类之间的耦合度，降低类的修改对其他类的影响，提高稳定性与复用性。</p></blockquote> <h3 id="里氏替换原则-面向抽象"><a href="#里氏替换原则-面向抽象" class="header-anchor">#</a> 里氏替换原则（面向抽象）</h3> <blockquote><p>里氏代换原则告诉我们，在软件中将一个基类对象替换成它的子类对象，程序将不会产生任何错误和异常，反过来则不成立，如果一个软件实体使用的是一个子类对象的话，那么它不一定能够使用基类对象。</p> <p>本质：在继承模式下，尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。</p></blockquote> <h3 id="依赖倒置原则-面对抽象"><a href="#依赖倒置原则-面对抽象" class="header-anchor">#</a> 依赖倒置原则（面对抽象）</h3> <blockquote><p>抽象不应该依赖于具体类，具体类应当依赖于抽象。换言之，要针对接口编程，而不是针对实现编程。</p> <p>//todo 待理解</p> <p>例如：HashMap为什么要用Map接口？优点是什么</p></blockquote> <h3 id="接口分离原则-高内聚"><a href="#接口分离原则-高内聚" class="header-anchor">#</a> 接口分离原则（高内聚）</h3> <blockquote><p>使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p> <p>本质：可以认为是<strong>单一职责</strong>对接口的要求，接口粒度太大会导致其实现类职责不单一。</p></blockquote> <h2 id="二、常见设计模式"><a href="#二、常见设计模式" class="header-anchor">#</a> 二、常见设计模式</h2> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesdesign_overview_3.png" alt="img"></p> <h2 id="_2-1-创建型"><a href="#_2-1-创建型" class="header-anchor">#</a> 2.1 创建型</h2> <h3 id="单例模式"><a href="#单例模式" class="header-anchor">#</a> 单例模式</h3> <blockquote><p>目的：减少类的频繁创建和销毁，降低内存的使用</p> <p>应用：</p> <p>在Spring中，单例的应用是比较多的，我们通常是通过<code>@Component</code>注解来声明Bean，并将其注入到IOC容器中，而IOC容器中的Bean默认为单例。</p></blockquote> <p><strong>饿汉模式</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+ <span class="token comment">// 首先，将 new Singleton() 堵死</span>
+ <span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token comment">// 创建私有静态实例，意味着这个类第一次使用的时候就会进行创建</span>
+ <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>懒汉模式</strong></p> <p>懒汉模式下的单例会有线程安全问题，有两种解决方式：</p> <ol><li>直接在方法加锁，这种实现简单，但是性能低</li> <li>采用双重校验锁，当有多个线程进入第一层if后，通过加锁创建保证单例。（推荐）</li></ol> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">// 双重校验锁</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 首先，也是先堵死 new Singleton() 这条路</span>
+    <span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment">// volatile保证多线程的可见性</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> instance <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 加锁</span>
+            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 这一次判断也是必须的，不然会有并发问题</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="原型模式"><a href="#原型模式" class="header-anchor">#</a> 原型模式</h3> <blockquote><p>有一个原型<strong>实例</strong>，基于这个原型实例产生新的实例，也就是“克隆”了。</p> <p>应用：在Java中，Object类定义了clone方法，但是要调用该方法，是要实现cloneable接口。</p></blockquote> <h3 id="工厂模式"><a href="#工厂模式" class="header-anchor">#</a> 工厂模式</h3> <blockquote><p>目的：解耦客户端代码和大量对象创建的代码</p></blockquote> <p><strong>简单工厂模式</strong></p> <blockquote><p>将客户端代码中的通过if判断创建不同对象的语句抽离出来，单独维护到工厂类中，使得创建过程与客户端代码解耦。</p></blockquote> <p>优点：实现简单，客户端代码与创建代码解耦，提高代码复用性。</p> <p>缺点：</p> <ul><li>当产品的种类非常多的时候，if-else的语句会很多</li> <li>不符合开闭原则，添加和删除产品都需要修改工厂的代码</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images7cd61ae0-71f6-11e8-b1ea-d92fd075c722.jpg" alt="img"></p> <p><strong>工厂方法模式</strong></p> <blockquote><p>父类工厂不再提供具体实现，由子类继承工厂并实现具体过程。</p></blockquote> <p>优点：</p> <ul><li>符合开闭原则，程序更容易拓展</li></ul> <p>缺点：</p> <ul><li>对于有多种分类的产品，或具有二级分类的产品，工厂方法模式并不适用</li></ul> <blockquote><p><strong>多种分类</strong>：如我们有一个电子白板白板程序，可以绘制各种图形。那么画笔的绘制功能可以理解为是一个工厂，而图形可以理解为一种产品；图形可以根据形状分为直线、矩形、椭圆等，也可以根据颜色分为红色图形、绿色图形、蓝色图形等。</p> <p><strong>二级分类：</strong> 如一个家电工厂，它可能同时生产冰箱、空调和洗衣机，那么冰箱、空调、洗衣机属于一级分类；而洗衣机又可能分为高效型的和节能型的，那么高效型洗衣机和节能型洗衣机就属于二级分类。</p></blockquote> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images7c1ce790-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="enter image description here"></p> <p><strong>抽象工厂模式</strong></p> <blockquote><p>工厂不再只限于生产一种产品，而是可生产多种产品，产品的特性则被抽象到具体工厂上，让每个工厂生产不同特性的产品。</p></blockquote> <p>优点：</p> <ul><li>解决了具有二级分类的产品的创建</li></ul> <p>缺点：</p> <ul><li>如果产品的分类超过二级，如三级甚至更多的级，抽象工厂模式将会变得非常臃肿</li> <li>不能解决产品有多种分类多种组合的问题</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesb466fff0-71f7-11e8-9e76-835574e7e257.jpg" alt="enter image description here"></p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images95306e00-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="enter image description here"></p> <blockquote><p>AppliancesFactory 是一个抽象的工厂类，定义了三个方法，分别用来生产冰箱（Refrigerator）、空调（Air-conditioner）、洗衣机（WashingMachine）。EfficientFactory 和 EnergySavingFactory 是两个具体的工厂类，分别用来生产高效型的家电和节能弄的家电。</p></blockquote> <blockquote><p><strong>如果产品有多种分类多种组合怎么办？</strong></p> <p>如果产品有多种分类，就不能单独使用工厂模式了，需要结合其他的设计模式进行优化。如上面提到的白板程序，可以结合中介模式和工厂方法模式进行实现。</p></blockquote> <h2 id="_2-2-结构型"><a href="#_2-2-结构型" class="header-anchor">#</a> 2.2 结构型</h2> <h3 id="代理模式"><a href="#代理模式" class="header-anchor">#</a> 代理模式</h3> <blockquote><p>代理模式可以用于代码增强作用。代理类通过调用真实类的方法，并在其调用前后做增强，客户端调用代理类间接实现对真实类的调用。</p></blockquote> <p>目的：对原有的类添加新的特性</p> <p>应用：Spring AOP：日志、权限</p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images01a1acc0-d89c-11e7-9363-994f5e2a852c.jpg" alt="enter image description here"></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Image</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">showImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HighResolutionImage</span> <span class="token keyword">implements</span> <span class="token class-name">Image</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">URL</span> imageURL<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> startTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> height<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> width<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> height<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> width<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">HighResolutionImage</span><span class="token punctuation">(</span><span class="token class-name">URL</span> imageURL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>imageURL <span class="token operator">=</span> imageURL<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>startTime <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token number">600</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token number">600</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 模拟图片加载，延迟 3s 加载完成</span>
+        <span class="token keyword">long</span> endTime <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> endTime <span class="token operator">-</span> startTime <span class="token operator">&gt;</span> <span class="token number">3000</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Real Image: &quot;</span> <span class="token operator">+</span> imageURL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImageProxy</span> <span class="token keyword">implements</span> <span class="token class-name">Image</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">HighResolutionImage</span> highResolutionImage<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">ImageProxy</span><span class="token punctuation">(</span><span class="token class-name">HighResolutionImage</span> highResolutionImage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>highResolutionImage <span class="token operator">=</span> highResolutionImage<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>highResolutionImage<span class="token punctuation">.</span><span class="token function">isLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Temp Image: &quot;</span> <span class="token operator">+</span> highResolutionImage<span class="token punctuation">.</span><span class="token function">getWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> highResolutionImage<span class="token punctuation">.</span><span class="token function">getHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        highResolutionImage<span class="token punctuation">.</span><span class="token function">showImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImageViewer</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">String</span> image <span class="token operator">=</span> <span class="token string">&quot;http://image.jpg&quot;</span><span class="token punctuation">;</span>
+        <span class="token class-name">URL</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">HighResolutionImage</span> highResolutionImage <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HighResolutionImage</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Image</span> imageProxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ImageProxy</span><span class="token punctuation">(</span>highResolutionImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        imageProxy<span class="token punctuation">.</span><span class="token function">showImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="装饰器模式"><a href="#装饰器模式" class="header-anchor">#</a> 装饰器模式</h3> <blockquote><p>待补充</p></blockquote> <h3 id="适配器模式"><a href="#适配器模式" class="header-anchor">#</a> 适配器模式</h3> <ul><li><a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E9%80%82%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%BA%AB%E9%AB%98%E4%B8%8D%E5%A4%9F%E9%9E%8B%E6%9D%A5%E5%87%91.md" target="_blank" rel="noopener noreferrer">参考<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p>目的：把一个类接口转换成另一个用户需要的接口。</p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimages43604d60-71ee-11e8-be4d-f5aac07d9486.jpg" alt="enter image description here"></p> <p>应用场景：</p> <ul><li>系统需要使用现有的类，而这些类的接口不符合现有系统的要求。</li> <li>对已有的系统拓展新功能时，尤其适用于在设计良好的系统框架下增加接入第三方的接口或第三方的 SDK 时。例如原来的项目Txt阅读和Epub阅读两种模式，后来业务扩展，需要加入PDF阅读模式，但是PDF引用了第三方SDK，无法直接兼容系统，故采用适配器模式进行适配。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images306de130-71ef-11e8-b1ea-d92fd075c722.jpg" alt="enter image description here"></p> <h3 id="桥接模式"><a href="#桥接模式" class="header-anchor">#</a> 桥接模式</h3> <blockquote><p>待补充</p></blockquote> <h2 id="_2-3-行为型"><a href="#_2-3-行为型" class="header-anchor">#</a> 2.3 行为型</h2> <h3 id="责任链模式"><a href="#责任链模式" class="header-anchor">#</a> 责任链模式</h3> <blockquote><p>责任链就是一种解耦请求发送者与接收者的设计模式，通过创建多个对象，并将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。应用场景有：</p> <ul><li>分级审批</li> <li>Netty的pipelineHandler</li> <li>Java的Filter</li></ul></blockquote> <h3 id="观察者模式"><a href="#观察者模式" class="header-anchor">#</a> 观察者模式</h3> <h3 id="策略模式"><a href="#策略模式" class="header-anchor">#</a> 策略模式</h3> <h3 id="模版方法"><a href="#模版方法" class="header-anchor">#</a> 模版方法</h3></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2023-2-7 4:20:28 ├F10: PM┤</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/posts/方法论/开发设计/UML.html" class="prev">
+        UML
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1c337853.js" defer></script><script src="/assets/js/3.b02e7092.js" defer></script><script src="/assets/js/161.a6c486b5.js" defer></script>
+  </body>
+</html>

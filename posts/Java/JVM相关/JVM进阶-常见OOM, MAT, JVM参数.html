@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、常见的OOM异常 | Java 知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理, MySQL, ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目...">
+    <meta name="robots" content="all">
+    <meta name="author" content="pdai">
+    <meta name="keywords" content="Java 全栈知识体系, java体系, java知识体系, java框架,java详解,java学习路线,java spring, java面试, 知识体系, java技术体系, java编程, java编程指南,java开发体系, java开发,java教程,java,java数据结构, 算法, 开发基础">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preload" href="/assets/css/0.styles.2e713c08.css" as="style"><link rel="preload" href="/assets/js/app.1c337853.js" as="script"><link rel="preload" href="/assets/js/3.b02e7092.js" as="script"><link rel="preload" href="/assets/js/14.062ad1e9.js" as="script"><link rel="prefetch" href="/assets/js/10.ceb3101a.js"><link rel="prefetch" href="/assets/js/100.b09a4b02.js"><link rel="prefetch" href="/assets/js/101.c905564f.js"><link rel="prefetch" href="/assets/js/102.b0347c86.js"><link rel="prefetch" href="/assets/js/103.0b941500.js"><link rel="prefetch" href="/assets/js/104.aa9d77de.js"><link rel="prefetch" href="/assets/js/105.4cbc1bc6.js"><link rel="prefetch" href="/assets/js/106.6a6b364e.js"><link rel="prefetch" href="/assets/js/107.4376147f.js"><link rel="prefetch" href="/assets/js/108.72d51d06.js"><link rel="prefetch" href="/assets/js/109.df0075ec.js"><link rel="prefetch" href="/assets/js/11.99f846c6.js"><link rel="prefetch" href="/assets/js/110.57cc32a8.js"><link rel="prefetch" href="/assets/js/111.982f4d8b.js"><link rel="prefetch" href="/assets/js/112.38bfda33.js"><link rel="prefetch" href="/assets/js/113.2d834ece.js"><link rel="prefetch" href="/assets/js/114.7600e6b5.js"><link rel="prefetch" href="/assets/js/115.c53dd888.js"><link rel="prefetch" href="/assets/js/116.dd8a6a65.js"><link rel="prefetch" href="/assets/js/117.8511fe15.js"><link rel="prefetch" href="/assets/js/118.ade530c5.js"><link rel="prefetch" href="/assets/js/119.f23bf053.js"><link rel="prefetch" href="/assets/js/12.743bef58.js"><link rel="prefetch" href="/assets/js/120.e0a8b7ea.js"><link rel="prefetch" href="/assets/js/121.ffc1f611.js"><link rel="prefetch" href="/assets/js/122.42847824.js"><link rel="prefetch" href="/assets/js/123.50e0eada.js"><link rel="prefetch" href="/assets/js/124.25d50192.js"><link rel="prefetch" href="/assets/js/125.e17385d1.js"><link rel="prefetch" href="/assets/js/126.904ed144.js"><link rel="prefetch" href="/assets/js/127.5a938814.js"><link rel="prefetch" href="/assets/js/128.b353e3a1.js"><link rel="prefetch" href="/assets/js/129.2c18e0d3.js"><link rel="prefetch" href="/assets/js/13.adb5d444.js"><link rel="prefetch" href="/assets/js/130.69a2b37b.js"><link rel="prefetch" href="/assets/js/131.c02089a1.js"><link rel="prefetch" href="/assets/js/132.bc2caf02.js"><link rel="prefetch" href="/assets/js/133.5b625fea.js"><link rel="prefetch" href="/assets/js/134.c0444d3e.js"><link rel="prefetch" href="/assets/js/135.570145d4.js"><link rel="prefetch" href="/assets/js/136.14dc0146.js"><link rel="prefetch" href="/assets/js/137.5571aeca.js"><link rel="prefetch" href="/assets/js/138.d0e7ecd3.js"><link rel="prefetch" href="/assets/js/139.8122e620.js"><link rel="prefetch" href="/assets/js/140.a4157b9e.js"><link rel="prefetch" href="/assets/js/141.a21e8c95.js"><link rel="prefetch" href="/assets/js/142.b77c9e6a.js"><link rel="prefetch" href="/assets/js/143.6ed28be3.js"><link rel="prefetch" href="/assets/js/144.4ed950c5.js"><link rel="prefetch" href="/assets/js/145.defcbdcf.js"><link rel="prefetch" href="/assets/js/146.1601f6b6.js"><link rel="prefetch" href="/assets/js/147.bcf8cfce.js"><link rel="prefetch" href="/assets/js/148.06c95943.js"><link rel="prefetch" href="/assets/js/149.89cf96c2.js"><link rel="prefetch" href="/assets/js/15.b9719217.js"><link rel="prefetch" href="/assets/js/150.40482dd5.js"><link rel="prefetch" href="/assets/js/151.5c02beef.js"><link rel="prefetch" href="/assets/js/152.1c7a84a6.js"><link rel="prefetch" href="/assets/js/153.fde1ee98.js"><link rel="prefetch" href="/assets/js/154.11c91a1d.js"><link rel="prefetch" href="/assets/js/155.083704c8.js"><link rel="prefetch" href="/assets/js/156.5463b99a.js"><link rel="prefetch" href="/assets/js/157.560a333f.js"><link rel="prefetch" href="/assets/js/158.299f1eab.js"><link rel="prefetch" href="/assets/js/159.9abe708d.js"><link rel="prefetch" href="/assets/js/16.fca7d7b7.js"><link rel="prefetch" href="/assets/js/160.4ff46a0f.js"><link rel="prefetch" href="/assets/js/161.a6c486b5.js"><link rel="prefetch" href="/assets/js/162.bef29922.js"><link rel="prefetch" href="/assets/js/163.7cf2468e.js"><link rel="prefetch" href="/assets/js/164.27c6a07e.js"><link rel="prefetch" href="/assets/js/165.9279b6b4.js"><link rel="prefetch" href="/assets/js/166.1246f61a.js"><link rel="prefetch" href="/assets/js/167.9c2dbfa7.js"><link rel="prefetch" href="/assets/js/168.a40fd447.js"><link rel="prefetch" href="/assets/js/169.eaaa3b21.js"><link rel="prefetch" href="/assets/js/17.63c7bd06.js"><link rel="prefetch" href="/assets/js/170.38b55274.js"><link rel="prefetch" href="/assets/js/171.0aa03f11.js"><link rel="prefetch" href="/assets/js/172.a9b46f05.js"><link rel="prefetch" href="/assets/js/173.79282476.js"><link rel="prefetch" href="/assets/js/174.c0183c86.js"><link rel="prefetch" href="/assets/js/175.478a47f9.js"><link rel="prefetch" href="/assets/js/176.75a5a27f.js"><link rel="prefetch" href="/assets/js/18.52e671f4.js"><link rel="prefetch" href="/assets/js/19.448d0875.js"><link rel="prefetch" href="/assets/js/20.2cef79e7.js"><link rel="prefetch" href="/assets/js/21.aa3006bb.js"><link rel="prefetch" href="/assets/js/22.710d6e2c.js"><link rel="prefetch" href="/assets/js/23.ad2e9c92.js"><link rel="prefetch" href="/assets/js/24.020145fe.js"><link rel="prefetch" href="/assets/js/25.ada5f251.js"><link rel="prefetch" href="/assets/js/26.d22d138b.js"><link rel="prefetch" href="/assets/js/27.b3cf1201.js"><link rel="prefetch" href="/assets/js/28.5ff0bfb8.js"><link rel="prefetch" href="/assets/js/29.485f2b8b.js"><link rel="prefetch" href="/assets/js/30.2317d6ce.js"><link rel="prefetch" href="/assets/js/31.c4451eaa.js"><link rel="prefetch" href="/assets/js/32.6b847218.js"><link rel="prefetch" href="/assets/js/33.87c3b3aa.js"><link rel="prefetch" href="/assets/js/34.e38c6dd2.js"><link rel="prefetch" href="/assets/js/35.d279db47.js"><link rel="prefetch" href="/assets/js/36.f753589b.js"><link rel="prefetch" href="/assets/js/37.4a6a2e39.js"><link rel="prefetch" href="/assets/js/38.ae8bd94d.js"><link rel="prefetch" href="/assets/js/39.c59385c5.js"><link rel="prefetch" href="/assets/js/4.775276f1.js"><link rel="prefetch" href="/assets/js/40.ec09fa5c.js"><link rel="prefetch" href="/assets/js/41.38dd0189.js"><link rel="prefetch" href="/assets/js/42.eb939c7b.js"><link rel="prefetch" href="/assets/js/43.89c78c22.js"><link rel="prefetch" href="/assets/js/44.79d9957a.js"><link rel="prefetch" href="/assets/js/45.2d86fd58.js"><link rel="prefetch" href="/assets/js/46.b9bc9b70.js"><link rel="prefetch" href="/assets/js/47.ada08b04.js"><link rel="prefetch" href="/assets/js/48.539528a1.js"><link rel="prefetch" href="/assets/js/49.6fbfbbaa.js"><link rel="prefetch" href="/assets/js/5.eee55e85.js"><link rel="prefetch" href="/assets/js/50.3c0cf41c.js"><link rel="prefetch" href="/assets/js/51.5325c960.js"><link rel="prefetch" href="/assets/js/52.3b1cd138.js"><link rel="prefetch" href="/assets/js/53.78d19eef.js"><link rel="prefetch" href="/assets/js/54.5e468d37.js"><link rel="prefetch" href="/assets/js/55.d9a8dcb6.js"><link rel="prefetch" href="/assets/js/56.9d93de98.js"><link rel="prefetch" href="/assets/js/57.f21c715f.js"><link rel="prefetch" href="/assets/js/58.1475a83f.js"><link rel="prefetch" href="/assets/js/59.819b29ae.js"><link rel="prefetch" href="/assets/js/6.8e026274.js"><link rel="prefetch" href="/assets/js/60.41a3a7a0.js"><link rel="prefetch" href="/assets/js/61.e83bc878.js"><link rel="prefetch" href="/assets/js/62.329c8a5a.js"><link rel="prefetch" href="/assets/js/63.169b3b2c.js"><link rel="prefetch" href="/assets/js/64.47f034f3.js"><link rel="prefetch" href="/assets/js/65.0d8bd679.js"><link rel="prefetch" href="/assets/js/66.d23e9e5e.js"><link rel="prefetch" href="/assets/js/67.f9abb6fc.js"><link rel="prefetch" href="/assets/js/68.67f072df.js"><link rel="prefetch" href="/assets/js/69.a733e18a.js"><link rel="prefetch" href="/assets/js/7.c5a82798.js"><link rel="prefetch" href="/assets/js/70.752d07fc.js"><link rel="prefetch" href="/assets/js/71.c171bfd0.js"><link rel="prefetch" href="/assets/js/72.ebcd692e.js"><link rel="prefetch" href="/assets/js/73.00dab538.js"><link rel="prefetch" href="/assets/js/74.7cbd77ae.js"><link rel="prefetch" href="/assets/js/75.fad5345b.js"><link rel="prefetch" href="/assets/js/76.a5544c13.js"><link rel="prefetch" href="/assets/js/77.153c5242.js"><link rel="prefetch" href="/assets/js/78.dd6275bf.js"><link rel="prefetch" href="/assets/js/79.824b3d5e.js"><link rel="prefetch" href="/assets/js/8.dc522fd4.js"><link rel="prefetch" href="/assets/js/80.a40f869a.js"><link rel="prefetch" href="/assets/js/81.45fe78e3.js"><link rel="prefetch" href="/assets/js/82.cec07a57.js"><link rel="prefetch" href="/assets/js/83.4b57cb83.js"><link rel="prefetch" href="/assets/js/84.c39ee6cb.js"><link rel="prefetch" href="/assets/js/85.a32409a4.js"><link rel="prefetch" href="/assets/js/86.16a7b081.js"><link rel="prefetch" href="/assets/js/87.2c4f62cb.js"><link rel="prefetch" href="/assets/js/88.bd227216.js"><link rel="prefetch" href="/assets/js/89.ac4201b8.js"><link rel="prefetch" href="/assets/js/9.df3cd7fc.js"><link rel="prefetch" href="/assets/js/90.bf6b197a.js"><link rel="prefetch" href="/assets/js/91.9ba4ee3f.js"><link rel="prefetch" href="/assets/js/92.2972038d.js"><link rel="prefetch" href="/assets/js/93.5f3249d9.js"><link rel="prefetch" href="/assets/js/94.4da2a6f4.js"><link rel="prefetch" href="/assets/js/95.8ee0a7a7.js"><link rel="prefetch" href="/assets/js/96.6c75956c.js"><link rel="prefetch" href="/assets/js/97.eb069d33.js"><link rel="prefetch" href="/assets/js/98.d099974a.js"><link rel="prefetch" href="/assets/js/99.f53424f3.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.63928db4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2e713c08.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Java 知识体系</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Go" class="dropdown-title"><span class="title">Go</span> <span class="arrow down"></span></button> <button type="button" aria-label="Go" class="mobile-dropdown-title"><span class="title">Go</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/Go/Go基础-语法,反射,并发.html" class="nav-link">
+  Go基础-语法,反射,并发
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          JVM相关
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="nav-link">
+  JVM进阶-JMM, GC, OOM
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="nav-link">
+  JVM进阶-常见OOM, MAT, JVM参数
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java并发框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="nav-link">
+  AQS抽象队列同步器
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发原则.html" class="nav-link">
+  Java并发原则
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Java并发基础.html" class="nav-link">
+  Java并发基础
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="nav-link">
+  Synchronize关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="nav-link">
+  Volatile关键字
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="nav-link">
+  线程安全 - 原子操作, 死锁
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="nav-link">
+  线程池与数据库连接池的区别
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/Java/Java版本特性.html" class="nav-link">
+  Java版本特性
+</a></li><li class="dropdown-item"><h4>
+          Java集合框架
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/HashMap.html" class="nav-link">
+  HashMap
+</a></li><li class="dropdown-subitem"><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="nav-link">
+  Java容器基础-Map, List, Set
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="算法" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="算法" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/算法/leetcode100.html" class="nav-link">
+  leetcode100
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/排序算法.html" class="nav-link">
+  排序算法
+</a></li><li class="dropdown-item"><!----> <a href="/posts/算法/算法框架学习.html" class="nav-link">
+  算法框架学习
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="框架｜中间件" class="dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="框架｜中间件" class="mobile-dropdown-title"><span class="title">框架｜中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          kafka
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/kafka/Kafka基础-架构, 组件.html" class="nav-link">
+  Kafka基础-架构, 组件
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/kafka/kafka进阶-高性能, 高可用, 高可靠.html" class="nav-link">
+  kafka进阶-高性能, 高可用, 高可靠
+</a></li></ul></li><li class="dropdown-item"><h4>
+          netty
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty基础-基础理论, 架构.html" class="nav-link">
+  Netty基础-基础理论, 架构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-Modbus.html" class="nav-link">
+  Netty实战-Modbus
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty实战-情报板.html" class="nav-link">
+  Netty实战-情报板
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/netty/Netty进阶-IO, 线程模型, 零拷贝.html" class="nav-link">
+  Netty进阶-IO, 线程模型, 零拷贝
+</a></li></ul></li><li class="dropdown-item"><h4>
+          redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-常用命令.html" class="nav-link">
+  Redis基础-常用命令
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis基础-数据结构.html" class="nav-link">
+  Redis基础-数据结构
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-管道, 事务, 持久化.html" class="nav-link">
+  Redis进阶-管道, 事务, 持久化
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-缓存雪崩, 击穿, 穿透.html" class="nav-link">
+  Redis进阶-缓存雪崩, 击穿, 穿透
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/redis/Redis进阶-高可用模式.html" class="nav-link">
+  Redis进阶-高可用模式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          其他
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/中间件/其他/Nginx的安装及负载均衡.html" class="nav-link">
+  Nginx的安装及负载均衡
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Quartz核心知识.html" class="nav-link">
+  Quartz核心知识
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat配置日志格式.html" class="nav-link">
+  Tomcat配置日志格式
+</a></li><li class="dropdown-subitem"><a href="/posts/中间件/其他/Tomcat集群部署.html" class="nav-link">
+  Tomcat集群部署
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Spring" class="dropdown-title"><span class="title">Spring</span> <span class="arrow down"></span></button> <button type="button" aria-label="Spring" class="mobile-dropdown-title"><span class="title">Spring</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Spring Boot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/Spring AOP实现自动读写分离.html" class="nav-link">
+  Spring AOP实现自动读写分离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot2.0静态变量注入及过滤器的使用.html" class="nav-link">
+  SpringBoot2.0静态变量注入及过滤器的使用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot定时任务及redis分布式锁创建.html" class="nav-link">
+  SpringBoot定时任务及redis分布式锁创建
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot实现全局异常的捕获.html" class="nav-link">
+  SpringBoot实现全局异常的捕获
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Junit4.html" class="nav-link">
+  SpringBoot整合Junit4
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Maven实现环境隔离.html" class="nav-link">
+  SpringBoot整合Maven实现环境隔离
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合Spring Session实现单点登陆.html" class="nav-link">
+  SpringBoot整合Spring Session实现单点登陆
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Boot/SpringBoot整合redis.html" class="nav-link">
+  SpringBoot整合redis
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Cloud
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合ELK.html" class="nav-link">
+  SpringCloud整合ELK
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合WebSocket.html" class="nav-link">
+  SpringCloud整合WebSocket
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Cloud/SpringCloud整合Zipkin + Slethu.html" class="nav-link">
+  SpringCloud整合Zipkin + Slethu
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring Framework
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring AOP.html" class="nav-link">
+  Spring AOP
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring Bean.html" class="nav-link">
+  Spring Bean
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring IOC.html" class="nav-link">
+  Spring IOC
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/Spring高级应用.html" class="nav-link">
+  Spring高级应用
+</a></li><li class="dropdown-subitem"><a href="/posts/Spring/Spring Framework/认证授权（OAuth、JWT）.html" class="nav-link">
+  认证授权（OAuth、JWT）
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL事务隔离级别及Spring事务管理.html" class="nav-link">
+  MySQL事务隔离级别及Spring事务管理
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-分表,分库,主从.html" class="nav-link">
+  MySQL优化-分表,分库,主从
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL优化-索引.html" class="nav-link">
+  MySQL优化-索引
+</a></li><li class="dropdown-subitem"><a href="/posts/数据库/MySQL/MySQL进阶-InnoDB存储引擎.html" class="nav-link">
+  MySQL进阶-InnoDB存储引擎
+</a></li></ul></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库建表规则—三大范式.html" class="nav-link">
+  数据库建表规则—三大范式
+</a></li><li class="dropdown-item"><!----> <a href="/posts/数据库/数据库设计.html" class="nav-link">
+  数据库设计
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="大数据" class="dropdown-title"><span class="title">大数据</span> <span class="arrow down"></span></button> <button type="button" aria-label="大数据" class="mobile-dropdown-title"><span class="title">大数据</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版一）.html" class="nav-link">
+  Flume收集日志 - windows（实战版一）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Flume收集日志 - windows（实战版二）.html" class="nav-link">
+  Flume收集日志 - windows（实战版二）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/HBase理论学习与分析.html" class="nav-link">
+  HBase理论学习与分析
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop平台的搭建.html" class="nav-link">
+  Hadoop平台的搭建
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Hadoop的设计目标及重要特性.html" class="nav-link">
+  Hadoop的设计目标及重要特性
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（基本任务）.html" class="nav-link">
+  Oozie学习（基本任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/Oozie学习（定时任务）.html" class="nav-link">
+  Oozie学习（定时任务）
+</a></li><li class="dropdown-item"><!----> <a href="/posts/大数据/海量数据处理.html" class="nav-link">
+  海量数据处理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具｜运维" class="dropdown-title"><span class="title">工具｜运维</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具｜运维" class="mobile-dropdown-title"><span class="title">工具｜运维</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          实用工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/hugo + github编写个人博客.html" class="nav-link">
+  hugo + github编写个人博客
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/实用工具/vuepress + github搭建个人博客.html" class="nav-link">
+  vuepress + github搭建个人博客
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA远程连接Hadoop集群.html" class="nav-link">
+  IDEA远程连接Hadoop集群
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/IDEA高效开发.html" class="nav-link">
+  IDEA高效开发
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/构建工具Q&amp;A（Maven).html" class="nav-link">
+  构建工具Q&amp;A（Maven)
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/开发工具/程序员的工具包.html" class="nav-link">
+  程序员的工具包
+</a></li></ul></li><li class="dropdown-item"><h4>
+          运维部署
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：1、安装及常见命令.html" class="nav-link">
+  Docker实战：1、安装及常见命令
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：2、Dockerfile构建镜像.html" class="nav-link">
+  Docker实战：2、Dockerfile构建镜像
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker实战：3、三剑客之Docker Compose.html" class="nav-link">
+  Docker实战：3、三剑客之Docker Compose
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/Docker的基础概念.html" class="nav-link">
+  Docker的基础概念
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/JVM监测工具.html" class="nav-link">
+  JVM监测工具
+</a></li><li class="dropdown-subitem"><a href="/posts/开发运维/运维部署/阿里云部署SpringBoot.html" class="nav-link">
+  阿里云部署SpringBoot
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="方法论" class="dropdown-title"><span class="title">方法论</span> <span class="arrow down"></span></button> <button type="button" aria-label="方法论" class="mobile-dropdown-title"><span class="title">方法论</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础理论
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/事务理论-ACID.html" class="nav-link">
+  事务理论-ACID
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式一致性算法.html" class="nav-link">
+  分布式一致性算法
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式事务算法（2PC, 3PC, TCC).html" class="nav-link">
+  分布式事务算法（2PC, 3PC, TCC)
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（BASE）.html" class="nav-link">
+  分布式理论（BASE）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式理论（CAP）.html" class="nav-link">
+  分布式理论（CAP）
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/基础理论/分布式规范（XA）.html" class="nav-link">
+  分布式规范（XA）
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发设计
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/RESTful.html" class="nav-link">
+  RESTful
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/UML.html" class="nav-link">
+  UML
+</a></li><li class="dropdown-subitem"><a href="/posts/方法论/开发设计/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JVM相关</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="sidebar-link">JVM进阶-JMM, GC, OOM</a></li><li><a href="/posts/Java/JVM相关/JVM进阶-常见OOM, MAT, JVM参数.html" class="active sidebar-link">JVM进阶-常见OOM, MAT, JVM参数</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Java并发框架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html" class="sidebar-link">AQS抽象队列同步器</a></li><li><a href="/posts/Java/Java并发框架/Java并发原则.html" class="sidebar-link">Java并发原则</a></li><li><a href="/posts/Java/Java并发框架/Java并发基础.html" class="sidebar-link">Java并发基础</a></li><li><a href="/posts/Java/Java并发框架/Synchronize关键字.html" class="sidebar-link">Synchronize关键字</a></li><li><a href="/posts/Java/Java并发框架/Volatile关键字.html" class="sidebar-link">Volatile关键字</a></li><li><a href="/posts/Java/Java并发框架/线程安全 - 原子操作, 死锁.html" class="sidebar-link">线程安全 - 原子操作, 死锁</a></li><li><a href="/posts/Java/Java并发框架/线程池与数据库连接池的区别.html" class="sidebar-link">线程池与数据库连接池的区别</a></li></ul></section></li><li><a href="/posts/Java/Java版本特性.html" class="sidebar-link">Java版本特性</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Java集合框架</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/posts/Java/Java集合框架/HashMap.html" class="sidebar-link">HashMap</a></li><li><a href="/posts/Java/Java集合框架/Java容器基础-Map, List, Set.html" class="sidebar-link">Java容器基础-Map, List, Set</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="一、常见的oom异常"><a href="#一、常见的oom异常" class="header-anchor">#</a> 一、常见的OOM异常</h2> <blockquote><p>常见的OOM可以分为以下三类：</p> <ol><li>线程打开过多</li> <li>内存不足（内存溢出或内存泄漏）</li> <li>文件打开过多（IO流处理）</li></ol></blockquote> <h3 id="_1-1-线程oom"><a href="#_1-1-线程oom" class="header-anchor">#</a> 1.1 线程OOM</h3> <ul><li><a href="https://blog.csdn.net/weixin_37968613/article/details/104490441" target="_blank" rel="noopener noreferrer">实践<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p><strong>异常日志</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">Exception</span> in thread <span class="token string">&quot;main&quot;</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>OutOfMemoryError</span><span class="token operator">:</span> unable <span class="token keyword">to</span> <span class="token namespace">create</span> <span class="token keyword">native</span> thread<span class="token operator">:</span> possibly out of memory or process<span class="token operator">/</span>resource limits reached
+	at java<span class="token punctuation">.</span>base<span class="token operator">/</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>Thread</span><span class="token punctuation">.</span><span class="token function">start0</span><span class="token punctuation">(</span><span class="token class-name">Native</span> <span class="token class-name">Method</span><span class="token punctuation">)</span>
+	at java<span class="token punctuation">.</span>base<span class="token operator">/</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>Thread</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">801</span><span class="token punctuation">)</span>
+	at java<span class="token punctuation">.</span>base<span class="token operator">/</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span>ThreadPoolExecutor</span><span class="token punctuation">.</span><span class="token function">addWorker</span><span class="token punctuation">(</span><span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">939</span><span class="token punctuation">)</span>
+	at java<span class="token punctuation">.</span>base<span class="token operator">/</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span>ThreadPoolExecutor</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">1356</span><span class="token punctuation">)</span>
+	at java<span class="token punctuation">.</span>base<span class="token operator">/</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span>AbstractExecutorService</span><span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span><span class="token class-name">AbstractExecutorService</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">118</span><span class="token punctuation">)</span>
+	at com<span class="token punctuation">.</span>company<span class="token punctuation">.</span>hpv9<span class="token punctuation">.</span>test<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span>test<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">11</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><strong>排查过程</strong></p> <blockquote><p>通过OOM异常日志，可以知道是由于无法创建线程导致的OOM，并且可以根据栈信息定位问题代码的位置。</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>// 查看当前开启的线程数量
+<span class="token function">cat</span> proc/<span class="token punctuation">{</span>pid<span class="token punctuation">}</span>/status
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220913004852163.png" alt="image-20220913004852163"></p> <p><strong>优化</strong></p> <ol><li>服务器参数优化</li></ol> <blockquote><p>// 查看操作系统对每个进程的线程数限制，可以进行调大</p> <p>cat /proc/sys/kernel/threads-max</p></blockquote> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagese92f92873cbd48d3b599060a94e32a65~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="线程数限制.png"></p> <ol start="2"><li>业务代码优化
+<ul><li>替换<code>new Thread</code>为线程池，控制线程创建数量</li></ul></li></ol> <h3 id="_1-2-文件oom"><a href="#_1-2-文件oom" class="header-anchor">#</a> 1.2 文件OOM</h3> <p><strong>异常信息</strong></p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">E</span><span class="token operator">/</span>art<span class="token operator">:</span> ashmem_create_region failed <span class="token keyword">for</span> 'indirect ref table'<span class="token operator">:</span> <span class="token class-name">Too</span> many <span class="token keyword">open</span> <span class="token namespace">files</span>
+<span class="token class-name">Java</span><span class="token punctuation">.</span>lang<span class="token punctuation">.</span>OutOfMemoryError<span class="token operator">:</span> <span class="token class-name">Could</span> not allocate JNI <span class="token class-name">Env</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>问题分析</strong></p> <blockquote><p><strong>系统问题</strong>：操作系统对每个进程都有资源的限制，而默认的资源限制通常比较少，需要我们根据业务需求进行调高。</p> <p><strong>代码问题</strong>：如果IO操作有误，没有及时关闭IO流，或者突然大量用户线程同时创建大量文件，也可能出现这个问题。</p></blockquote> <p><strong>排查过程</strong></p> <blockquote><ol><li><p>通过<strong>异常日志</strong>，可以知道是在哪里位置出现了文件创建异常问题，初步检查该位置的代码。</p></li> <li><p>如果没问题，则通过收集到的<strong>dumpFd（文件描述符）</strong>，可以看到很多<strong>重复的文件名</strong>，进而大致定位到问题。</p></li> <li><p>检查到异常文件名后，再检查该文件的创建位置，进而进行<strong>IO流</strong>相关代码的检查。</p></li></ol></blockquote> <ul><li><p>查看文件资源限制</p> <ul><li><code>cat /proc/pid/limits</code></li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimagesimage-20220913005902463.png" alt="image-20220913005902463"></p> <ul><li><code>ulimit -n</code></li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220913225351404.png" alt="image-20220913225351404"></p></li></ul> <p><strong>监控机制</strong></p> <ul><li><strong>文件描述符监控</strong>：Linux 系统一切皆文件，进程每打开一个文件就会产生一个文件描述符fd（记录在/proc/pid/fd下面）。当fd数大于1000个，或者fd连续递增超过50个，就触发fd收集，将fd对应的文件路径上报到后台。</li> <li><strong>IO监控</strong>：监控完整的IO操作，包括<code>open、read、write、close</code>，通过在IO操作中插入勾子进行监控。</li></ul> <h3 id="_1-3-内存oom"><a href="#_1-3-内存oom" class="header-anchor">#</a> 1.3 内存OOM</h3> <p><strong>异常信息</strong></p> <ul><li>堆区</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">Exception</span> in thread <span class="token string">&quot;main&quot;</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>OutOfMemoryError</span><span class="token operator">:</span> <span class="token class-name">Java</span> heap space
+	at com<span class="token punctuation">.</span>company<span class="token punctuation">.</span>hpv9<span class="token punctuation">.</span>test<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span>test<span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>元方法区</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">// todo</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>堆外内存</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code>nio handle failed <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>OutOfMemoryError</span><span class="token operator">:</span> <span class="token class-name">Direct</span> buffer memory at org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>jetty<span class="token punctuation">.</span>io<span class="token punctuation">.</span>nio<span class="token punctuation">.</span>xxxx
+at org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>jetty<span class="token punctuation">.</span>io<span class="token punctuation">.</span>nio<span class="token punctuation">.</span>xxxx at org<span class="token punctuation">.</span>eclipse<span class="token punctuation">.</span>jetty<span class="token punctuation">.</span>io<span class="token punctuation">.</span>nio<span class="token punctuation">.</span>xxxx
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>问题分析</strong></p> <blockquote><p>JVM中JMM发生OOM的区域最常见的是<strong>堆区</strong>，<strong>元方法区</strong>和<strong>堆外内存</strong>。</p> <p><strong>配置问题</strong>：</p> <ul><li>堆区太小（内存溢出）：JVM默认的堆区大小比较少，需要通过参数配置调大堆区内存，而堆区又分为年轻代和老年代，可以参考下面的#参数调优进行相关配置。</li> <li>Eden区太小 + System.gc关闭（过早晋升）：如果年轻代内存分配过小频繁YGC，导致引用堆外内存的对象提前进入老年代，并且老年代没来得及进行GC，则可能导致堆外内存OOM。</li></ul> <p><strong>代码问题</strong>：</p> <ul><li>堆区：代码中的错误处理导致<strong>内存泄漏</strong>，如ThreadLocal。</li> <li>元方法区：<strong>反射</strong>的异常使用导致类不断被加载，进而导致元方法区OOM。</li> <li>堆外内存：（部分框架会用到堆外内存，例如Netty）
+<ul><li>堆外内存泄漏（<strong>框架bug</strong>-<a href="https://mp.weixin.qq.com/s/DESrF57_tDWH2TVqwe574g" target="_blank" rel="noopener noreferrer">美团Netty案例<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）：Netty框架源码NPE导致内存泄漏，进而导致堆外内存的OOM，其通过反射监控堆外内存的大小，并逐渐缩小范围，最后找到并处理bug。</li></ul></li></ul></blockquote> <p><strong>排查过程</strong></p> <blockquote><ol><li>配置JVM参数打印OOM时的堆区信息（<code>.hprof</code>文件）</li> <li>通过MAT工具解析hprof文件</li> <li>通过<code>Histogram</code>视图可以查看当前的实例占用的内存情况（通常会有占用内存很大的实例对象）</li> <li>通过对象引用、GC Root Path等调用链视图，定位问题代码</li></ol></blockquote> <h2 id="二、mat内存监控工具"><a href="#二、mat内存监控工具" class="header-anchor">#</a> 二、MAT内存监控工具</h2> <ul><li><p><a href="https://www.eclipse.org/mat/downloads.php" target="_blank" rel="noopener noreferrer">下载地址<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p><a href="https://www.jiweichengzhu.com/article/db04c076f3e848e8857b7aec1d519db9" target="_blank" rel="noopener noreferrer">实践参考一<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p>JVM 内存分析工具 MAT 的深度讲解与实践</p> <ul><li><a href="https://juejin.cn/post/6908665391136899079" target="_blank" rel="noopener noreferrer">*入门篇<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://juejin.cn/post/6911624328472133646" target="_blank" rel="noopener noreferrer">*进阶篇<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li> <li><p><a href="https://www.cnblogs.com/trust-freedom/p/6744948.html" target="_blank" rel="noopener noreferrer">*参考二<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/images677054-20170422185915024-1478731293.jpg" alt="img"></p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914002550594.png" alt="image-20220914002550594"></p> <h3 id="_2-1-常见内存分析工具对比"><a href="#_2-1-常见内存分析工具对比" class="header-anchor">#</a> 2.1 常见内存分析工具对比</h3> <table><thead><tr><th>产品功能</th> <th>MAT</th> <th>JProfiler</th> <th>Visual VM</th> <th>jhat</th> <th>jmap</th> <th>hprof</th></tr></thead> <tbody><tr><td>对象关联分析、深浅堆、GC ROOT、内存泄漏检测、线程分析、提供自定义程序扩展扩展</td> <td>Y</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td></tr> <tr><td>离线全局分析</td> <td>Y</td> <td>N</td> <td>Y</td> <td>Y</td> <td>N</td> <td>N</td></tr> <tr><td>内存实时分配情况</td> <td>N</td> <td>Y</td> <td>Y</td> <td>Y</td> <td>Y</td> <td>Y</td></tr> <tr><td>OQL</td> <td>Y</td> <td>N</td> <td>Y</td> <td>N</td> <td>N</td> <td>N</td></tr> <tr><td>内存分配堆栈、热点比例</td> <td>N</td> <td>Y</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td></tr> <tr><td>堆外内存分析</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td> <td>N</td></tr></tbody></table> <h3 id="_2-2-基础概念"><a href="#_2-2-基础概念" class="header-anchor">#</a> 2.2 基础概念</h3> <p><strong>Shallow Heap</strong></p> <blockquote><p>Shallow Heap 代表一个<strong>对象结构自身</strong>所占用的内存大小，不包括其属性引用对象所占的内存。如 java.util.ArrayList 对象的 Shallow Heap 包含8字节的对象头、8字节的对象数组属性 elementData 引用 、 4字节的 size 属性、4字节的 modCount 属性。</p></blockquote> <p><strong>Retained Set</strong></p> <blockquote><p>一个对象的 Retained Set，指的是该对象被 GC 回收后，所有能被回收的对象集合。</p></blockquote> <p><strong>Retained Heap</strong></p> <blockquote><p>Retained Heap 是一个对象被 GC 回收后，可释放的内存大小，等于释放对象的 Retained Heap 中所有对象的 Shallow Heap 的和。</p></blockquote> <p><strong>Dominator tree</strong></p> <blockquote><p>Dominator tree 是根据对象引用及支配关系生成的整体树状图，支配树清晰描述了对象间的依赖关系，可以认为是对象的引用树。</p> <ul><li>Dominator tree 中任一节点的子树就是被该节点支配的节点集合，也就是其 <strong>Retain Set</strong>。</li></ul></blockquote> <p><strong>OQL</strong></p> <blockquote><p>OQL 是类似于 SQL 的 MAT 专用统一查询语言，可以根据复杂的查询条件对 dump 文件中的类或者对象等数据进行查询筛选。</p></blockquote> <p><strong>references</strong></p> <blockquote><p>outgoing references、incoming references 可以直击对象间依赖关系，MAT 也提供了链式快速操作。</p> <ul><li>outgoing references：对象引用的外部对象（注意不包含对象的基本类型属性。基本属性内容可在 inspector 查看）。</li> <li>incoming references：直接引用了当前对象的对象，每个对象的 incoming references 可能有 0 到多个。</li></ul></blockquote> <h3 id="_2-3-mat功能"><a href="#_2-3-mat功能" class="header-anchor">#</a> 2.3 MAT功能</h3> <blockquote><p>MAT 的工作原理是<strong>对 dump 文件建立多种索引</strong>，并基于索引来实现以下四个功能，分别为【内存分布、对象依赖、对象状态和条件检索】，并通过可视化展现辅助 Developer 精细化了解 JVM 堆内存全貌。</p> <ul><li><p>[1]内存分布（重点）</p> <ul><li><strong>Overview</strong>（全局概览信息）：堆内存大小、对象个数、类的个数、类加载器的个数、GC root 个数等基本信息。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914001200494.png" alt="image-20220914001200494"></p> <ul><li><strong>Dominator tree</strong>（对象引用树）：包含对象的内存占用大小及对象的相互引用情况。按对象的 <code>Retain Heap</code> 排序，也支持按多个维度聚类统计。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914001214948.png" alt="image-20220914001214948"></p> <ul><li><strong>Histogram</strong>（实例内存占比）：罗列每个类实例的内存占比，包括自身内存占用量（Shallow Heap）及支配对象的内存占用量（Retain Heap），支持按 package、class loader、super class、class 聚类统计。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914001229614.png" alt="image-20220914001229614"></p> <ul><li><strong>Leak Suspects</strong>（可疑泄漏点）：MAT提供的问题分析工具，可以简单分析可能出现问题的地方，可解决一些基础问题，但复杂的问题往往帮助有限。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914001517072.png" alt="image-20220914001517072"></p></li> <li><p>[2]对象间依赖（如实体对象引用关系、线程引用关系、GC Root引用关系等）</p> <ul><li><strong>Thread overview</strong>（线程调用栈）：展现转储 dump 文件时线程栈帧等详细状态，也提供各线程的 Retain Heap 等关联内存信息。（两种方式查看，一种是直接点击上方的Thread overview，查看所有线程信息，一种是在Dominator tree中右键查看其线程信息）</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914002411304.png" alt="image-20220914002411304"></p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914001714918.png" alt="image-20220914001714918"></p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914002038575.png" alt="image-20220914002038575"></p> <ul><li><strong>Dominator tree</strong>：该视图即为对象间的引用关系。除了直接用Dominator视图之外（显示了线程或class loader的对象引用关系），还可以在Histogram视图右键如下图，显示该对象及引用了该对象的对象。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220915001044459.png" alt="image-20220915001044459"></p> <ul><li><strong>Path To GC Roots</strong>（对象到GC Root的引用链路）：提供任一对象到GC Root的链路详情，帮助了解不能被 GC 回收的原因</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220914235837087.png" alt="image-20220914235837087"></p> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220915000013601.png" alt="image-20220915000013601"></p></li> <li><p>[3]对象状态（内存占用量、字段属性值等）</p> <ul><li><strong>inspector</strong>面板：可以查看对象的基本信息，包括类名、所在包、父类、类加载器、对象占用内存、GC root信息。下面的Statics可以查看其基本数据类型，对象右键outcoming视图可以查看其调用的外部对象。</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220915002441866.png" alt="image-20220915002441866"></p> <ul><li>（TODO）<strong>集合状态的检测</strong>，如：通过 ArrayList 或数组的填充率定位空集合空数组造成的内存浪费、通过 HashMap 冲突率判定 hash 策略是否合理等。</li></ul></li> <li><p>[4]条件检索（OQL、正则匹配查询等）</p> <ul><li><strong>按虚拟内存地址寻址</strong>：根据对象的十六进制地址查找对象。</li> <li><strong>OQL</strong>：提供一种类似于SQL的对象（类）级别统一结构化查询语言。如：查找 size＝0 且未使用过的 ArrayList：  <code>select * from java.util.ArrayList where size=0 and modCount=0</code>；查找所有的String的length属性的：  <code>select s.length from instanceof String s</code>。</li></ul></li></ul></blockquote> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220913003713039.png" alt="image-20220913003713039"></p> <h2 id="三、项目实践"><a href="#三、项目实践" class="header-anchor">#</a> 三、项目实践</h2> <h3 id="_3-1-oom异常的排查流程"><a href="#_3-1-oom异常的排查流程" class="header-anchor">#</a> 3.1 OOM异常的排查流程</h3> <ol><li><strong>日志</strong>：通过观察日志，再结合最近的上线版本或者更改的代码看能否快速定位到问题。</li> <li><strong>Heap Dump</strong>：如果无法直接通过日志分析出，则利用内存分析工具（例如MAT）分析Heap Dump文件，通过其内存视图检查是内存溢出还是内存泄漏问题。</li> <li><strong>对象引用关系链</strong>：如果是内存泄漏问题，则通过其<strong>线程调用链视图</strong>、<strong>对象引用视图</strong>、<strong>GC Root链路</strong>定位出现内存泄漏的代码区域，并进行修复。</li> <li><strong>参数优化</strong>：如果不是内存泄漏问题，即内存中存在的实例都是合理的，那么就需要考虑对内存进行调优，可以从下面几个角度考虑：
+<ul><li>如果当前物理内存还未分配满，则考虑调大堆区内存大小：<code>-Xms</code>，<code>-Xmx</code></li> <li>如果物理内存已满，则考虑加大内存或者部署多实例进行负载均衡</li></ul></li></ol> <h3 id="_3-2-项目遇到的oom"><a href="#_3-2-项目遇到的oom" class="header-anchor">#</a> 3.2 项目遇到的OOM</h3> <p>OOM异常：</p> <ol><li>情报板自动发布大量调用了new Thread，导致无法创建新的线程</li></ol> <blockquote><p>解决：</p> <ul><li>通过日志即+最近上线的代码即快速定位到问题代码处</li> <li>该用线程池解决问题</li></ul></blockquote> <ol start="2"><li>解析大XML导致的OOM</li></ol> <blockquote><p>TODO</p> <p>原因：BW源码解析XML存在bug导致了内存泄漏</p> <p>解决：</p> <ul><li>Heap Dump when OOM</li> <li>通过MAT解析堆快照
+<ul><li>通过实例内存视图定位大内存实例</li> <li>通过对象引用视图定位问题代码</li></ul></li> <li>引用第三方框架进行XML解析</li></ul></blockquote> <p>No Buffer space available</p> <ol><li>大量创建socket连接导致无法创建新的连接（十多万）</li></ol> <blockquote><p>原因：与设备通信过程通过TCP进行连接，而每次通信都创建了新的连接，旧的连接又没有释放</p> <p>解决：</p> <ul><li>日志分析定位问题</li> <li>建立缓存连接管道解决</li></ul></blockquote> <h2 id="四、参数调优"><a href="#四、参数调优" class="header-anchor">#</a> 四、参数调优</h2> <h3 id="_4-1-jvm参数分类"><a href="#_4-1-jvm参数分类" class="header-anchor">#</a> 4.1 JVM参数分类</h3> <ul><li><p><a href="https://zhuanlan.zhihu.com/p/127352212" target="_blank" rel="noopener noreferrer">参数分类<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p><a href="https://juejin.cn/post/6844903802378665997" target="_blank" rel="noopener noreferrer">参数调优<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li> <li><p><strong>标准参数（-）：所有的JVM实现都必须实现这些参数的功能，而且向后兼容；</strong></p></li></ul> <blockquote><p>例子：-verbose:class，-verbose:gc，-verbose:jni……</p></blockquote> <ul><li><strong>非标准参数（-X）：默认jvm实现这些参数的功能，但是并不保证所有jvm实现都满足，且不保证向后兼容；</strong></li></ul> <blockquote><p>例子：Xms20m，-Xmx20m，-Xmn20m，-Xss128k……</p></blockquote> <ul><li><strong>非Stable参数（-XX）：此类参数各个jvm实现会有所不同，将来可能会随时取消，需要慎重使用；</strong></li></ul> <blockquote><p>例子：-XX:+PrintGCDetails，-XX:-UseParallelGC，-XX:+PrintGCTimeStamps……</p></blockquote> <h3 id="_4-2-常见参数调优"><a href="#_4-2-常见参数调优" class="header-anchor">#</a> 4.2 常见参数调优</h3> <ul><li><a href="https://segmentfault.com/a/1190000038190184" target="_blank" rel="noopener noreferrer">官方推荐的堆区大小配置<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <blockquote><p>结合个人面试准备中的面试经历模块</p></blockquote> <p><strong>内存相关（重点）</strong></p> <blockquote><p>对于堆内存大小的调整，JDK官方给了下面的建议进行调整：</p> <ol><li>堆大小（-Xms，-Xmx）：老年代存活对象的3-4倍，即【Full GC之后的剩余的老年代内存占用】的3-4倍。</li> <li>元空间大小（-XX:MetaspaceSize，-XX:MaxMetaspaceSize）：老年代存活对象的1.2-1.5倍。</li> <li>年轻代大小（-Xmn）：老年代存活对象的1-1.5倍。</li> <li>老年代大小：老年代存活对象的2-3倍。</li></ol></blockquote> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimages1460000038190189.png" alt="img"></p> <ul><li><p>辅助参数：</p> <ul><li><code>-XX:+HeapDumpOnOutOfMemoryError</code>：当抛出OOM时进行HeapDump</li> <li><code>-XX:HeapDumpPath=/home/tmp/logs</code></li></ul></li> <li><p>大小调整：</p> <ul><li><code>-Xms20m</code>：设置jvm初始化堆大小为20m，一般与-Xmx相同，避免动态扩容带来的频繁GC</li> <li><code>-Xmx20m</code>：设置jvm最大可用内存大小为20m</li> <li><code>-Xmn20m</code>：设置新生代大小为20m</li> <li><code>-Xss128k</code>：设置每个线程的栈大小为128k</li> <li><code>-XX:NewRatio</code>：设置老年代和年轻代的比例，默认是2，即老年代：年轻代为2：1</li> <li><code>-XX:SurvivorRatio=8</code>：配置年轻代中的eden/survivor的比例为8，即如果新生代内存内存为10M，会分配给Eden-8M，Survivor（from）-1M，Survivor（to）-1M</li></ul></li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesv2-5acf2edfdf919ec7d4bda402e32b779c_1440w.jpg" alt="img"></p> <p><strong>GC相关</strong></p> <ul><li><p>垃圾回收器</p> <ul><li><code>-XX:UseSerialGC</code></li> <li><code>-XX:+UseConcMarkSweepGC</code>：使用CMS收集器（jdk14已经被移除）</li> <li><code>-XX:+UseParallelOldGC</code>：使用ParallelGC垃圾回收器</li> <li><code>-XX:+UseG1GC</code>：使用G1垃圾回收器</li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220913223539026.png" alt="image-20220913223539026"></p></li> <li><p><code>-XX:CMSInitiatingOccupancyFraction=80 CMS gc</code>，表示在老年代达到80%使用率时马上进行回收</p></li> <li><p><code>-XX:+PrintGCDetails</code>：打印GC详情</p> <ul><li>eden space 8192K, 33% used：eden区域总共8192k，使用了33%。2731/8192约等于0.33</li> <li>from space 1024K, 0% used</li> <li>to space 1024K, 0%used</li></ul></li></ul> <p><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimagesimage-20220913220538466.png" alt="image-20220913220538466"><img src="https://raw.githubusercontent.com/PI-KA-CHU/Image-OSS/main/imagesimage-20220913220152081.png" alt="image-20220913220152081"></p> <ul><li><code>-XX:+PrintGCTimeStamps</code>：打印时间戳</li></ul> <h2 id="四、参考"><a href="#四、参考" class="header-anchor">#</a> 四、参考</h2> <ul><li><a href="https://juejin.cn/post/7074762489736478757#heading-6" target="_blank" rel="noopener noreferrer">【性能优化】大厂OOM优化和监控方案<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2023-2-9 4:55:04 ├F10: PM┤</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/posts/Java/JVM相关/JVM进阶-JMM, GC, OOM.html" class="prev">
+        JVM进阶-JMM, GC, OOM
+      </a></span> <span class="next"><a href="/posts/Java/Java并发框架/AQS抽象队列同步器.html">
+        AQS抽象队列同步器
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.1c337853.js" defer></script><script src="/assets/js/3.b02e7092.js" defer></script><script src="/assets/js/14.062ad1e9.js" defer></script>
+  </body>
+</html>
